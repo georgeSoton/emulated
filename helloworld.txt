@@ -1,0 +1,33 @@
+00						*JMP,001
+01		Code start ptr	*0012,
+02		End ptr			*0020,
+03		1 literal		*0001,
+04		H				*0048,
+05		e				*0065,
+06		l				*006c,
+07		l				*006c,
+08		o				*006f,
+09						*0020,
+0A		W				*0057,
+0B		o				*006f,
+0C		r				*0072,	
+0D		l				*006c,
+0E		d				*0064,
+0F		!				*0021,
+10		/0				*0000,
+11		string ptr		*0004,
+12		load ptr		*LDR,011
+13		deref			*LDA,000
+14		if0 end			*IEZ,002
+15		print			*STR,OUT
+16		reload ptr		*LDR,011
+17		increment		*ADD,003
+18		save			*STR,011
+19		loop			*JMP,001
+1A						*NOP,0
+1B						*NOP,0
+1C						*NOP,0
+1D						*NOP,0
+1E						*NOP,0
+1F						*NOP,0
+20						*END,0
