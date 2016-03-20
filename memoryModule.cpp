@@ -89,7 +89,6 @@ void memoryModule::display(int16_t from, int16_t to)
 		else if (i == memory[BP])
 		{
 			std::cout<<std::setfill('-')<<std::setw(5)<<"BP"<<"|";
-			break;
 		}
 		else
 		{
