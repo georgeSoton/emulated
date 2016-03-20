@@ -37,6 +37,13 @@ int main(int argc, char *argv[])
 				debugpoints.push_back(debugint);
 			}
 		}
+		else
+		{
+			std::cout<<std::endl;
+			std::cout<<"\t"<<dump<<" not recognised"<<std::endl;
+			std::cout<<"\t-Use -d,0,1,2,3 to get debug output on those lines (in hex)"<<std::endl;
+			return 0;
+		}
 	}
 
 	memoryModule MEM = memoryModule();
