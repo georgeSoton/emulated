@@ -8,8 +8,8 @@ memoryModule::memoryModule()
 	{
 		memory[i]=0;
 	}
-	memory[SP] = 	0x7FB;
-	memory[BP] = 	0x7FB;
+	memory[SP] = 	0x7F9;
+	memory[BP] = 	0x7F9;
 	memory[PC] = 	0x000;
 }
 
@@ -46,6 +46,55 @@ void memoryModule::display(int16_t from, int16_t to)
 {
 	for (int16_t i=from;i<=to;i++)
 	{
-		std::cout<<std::setfill('0')<<std::hex<<"0x"<<std::setw(3)<<i<<"\t|\t"<<"0x"<<std::setw(4)<<memory[i]<<std::dec<<std::endl;
+
+		std::cout<<std::setfill('0')<<std::hex<<"0x"<<std::setw(3)<<i<<" |";
+		switch(i)
+		{
+			case SP:
+			std::cout<<std::setfill('-')<<std::setw(5)<<"SP"<<"|";
+			break;
+			case BP:
+			std::cout<<std::setfill('-')<<std::setw(5)<<"BP"<<"|";
+			break;
+			case PC:
+			std::cout<<std::setfill('-')<<std::setw(5)<<"PC"<<"|";
+			break;
+			case OUT:
+			std::cout<<std::setfill('-')<<std::setw(5)<<"OUT"<<"|";
+			break;
+			case U1:
+			std::cout<<std::setfill('-')<<std::setw(5)<<"U1"<<"|";
+			break;
+			case U2:
+			std::cout<<std::setfill('-')<<std::setw(5)<<"U2"<<"|";
+			break;
+			case U3:
+			std::cout<<std::setfill('-')<<std::setw(5)<<"U3"<<"|";
+			break;
+			default:
+				std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
+			break;
+		}
+		if (i == memory[SP])
+		{
+			if (memory[SP]==memory[BP])
+			{
+				std::cout<<std::setfill('-')<<std::setw(5)<<"SP|BP"<<"|";
+			}
+			else
+			{
+				std::cout<<std::setfill('-')<<std::setw(5)<<"SP"<<"|";
+			}
+		}
+		else if (i == memory[BP])
+		{
+			std::cout<<std::setfill('-')<<std::setw(5)<<"BP"<<"|";
+			break;
+		}
+		else
+		{
+			std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
+		}
+		std::cout<<std::setfill('0')<<" "<<"0x"<<std::setw(4)<<memory[i]<<std::dec<<std::endl;
 	}
 }

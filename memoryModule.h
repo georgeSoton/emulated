@@ -8,6 +8,8 @@
 #define PC 		0x7FD
 #define OUT 	0x7FC
 #define U1		0x7FB
+#define U2		0x7FA
+#define U3		0x7F9
 
 
 class memoryModule

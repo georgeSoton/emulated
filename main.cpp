@@ -5,12 +5,40 @@
 #include "fileout.h"
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
 #include <vector>
 
 std::ofstream outputFile;
-int main()
+int main(int argc, char *argv[])
 {
-	
+	std::vector<int16_t> debugpoints;
+	bool dodebug	=	false;
+	for(int i=1;i<argc;i++)
+	{
+		std::stringstream ss;
+		std::string dump;
+		ss<<argv[i];
+		std::getline(ss,dump,',');
+		if (dump=="-d")
+		{
+			while(1)
+			{
+				std::string debugp;
+				if(!std::getline(ss,debugp,','))
+				{
+					break;
+				}
+				std::stringstream conv;
+				int16_t debugint;
+				conv << debugp;
+				conv >>std::hex>>debugint;
+				debugpoints.push_back(debugint);
+			}
+		}
+	}
+
 	memoryModule MEM = memoryModule();
 	parser PARSER = parser(&MEM);
 	alu ALU = alu();
@@ -28,87 +56,86 @@ int main()
 		uint16_t opcode 	= (uint16_t)currentinstruction>>11;
 		int16_t data	= currentinstruction&0x07FF;
 		//std::cout<<std::hex<<opcode<<", "<<data<<std::endl;
-		std::cout<<"Executing line "<<std::hex<<MEM.get(PC)<<" ";
 		int16_t executedline = MEM.get(PC);
 		MEM.set(PC, MEM.get(PC)+1);	//Increment PC
 		if (opcode == END)
 		{
-			std::cout<<"END"<<std::endl;
+			std::cout<<"Executing line END"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			break;
 		}
 		switch(opcode)
 		{
 			case NOP:
-			std::cout<<"NOP"<<std::endl;
+			std::cout<<"Executing line NOP"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			break;
 
 			case STA:
-			std::cout<<"STA"<<std::endl;
+			std::cout<<"Executing line STA"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			MEM.set(data,ALU.getAcc());
 			break;
 
 			case ADD:
-			std::cout<<"ADD"<<std::endl;
+			std::cout<<"Executing line ADD"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			ALU.aluAdd(MEM.get(data));
 			break;
 
 			case SUB:
-			std::cout<<"SUB"<<std::endl;
+			std::cout<<"Executing line SUB"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			ALU.aluSub(MEM.get(data));
 			break;
 
 			case MUL:
-			std::cout<<"MUL"<<std::endl;
+			std::cout<<"Executing line MUL"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			ALU.aluMul(MEM.get(data));
 			break;
 
 			case DIV:
-			std::cout<<"DIV"<<std::endl;
+			std::cout<<"Executing line DIV"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			ALU.aluDiv(MEM.get(data));
 			break;
 
 			case AND:
-			std::cout<<"AND"<<std::endl;
+			std::cout<<"Executing line AND"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			ALU.aluAnd(MEM.get(data));
 			break;
 
 			case XOR:
-			std::cout<<"XOR"<<std::endl;
+			std::cout<<"Executing line XOR"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			ALU.aluXor(MEM.get(data));
 			break;
 
 			case ORR:
-			std::cout<<"ORR"<<std::endl;
+			std::cout<<"Executing line ORR"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			ALU.aluOrr(MEM.get(data));
 			break;
 
 			case SPI:
-			std::cout<<"SPI"<<std::endl;
+			std::cout<<"Executing line SPI"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			MEM.set(SP,MEM.get(SP)-1);
 			break;
 
 			case SPD:
-			std::cout<<"SPD"<<std::endl;
+			std::cout<<"Executing line SPD"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			MEM.set(SP,MEM.get(SP)+1);
 			break;
 
 			case JMP:
-			std::cout<<"JMP"<<std::endl;
+			std::cout<<"Executing line JMP"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			MEM.set(PC,MEM.get(data));
 			break;
 
 			case LDA:
-			std::cout<<"LDA"<<std::endl;
+			std::cout<<"Executing line LDA"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			ALU.setAcc(MEM.get(ALU.getAcc()));
 			break;
 
 			case LDR:
-			std::cout<<"LDR"<<std::endl;
+			std::cout<<"Executing line LDR"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			ALU.setAcc(MEM.get(data));
 			break;
 
 			case IEZ:
-			std::cout<<"IEZ"<<std::endl;
+			std::cout<<"Executing line IEZ"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			if (ALU.flagIEZ())
 			{
 				MEM.set(PC,MEM.get(data));
@@ -116,7 +143,7 @@ int main()
 			break;
 
 			case IGZ:
-			std::cout<<"IGZ"<<std::endl;
+			std::cout<<"Executing line IGZ"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			if (ALU.flagIGZ())
 			{
 				MEM.set(PC,MEM.get(data));
@@ -124,7 +151,7 @@ int main()
 			break;
 
 			case ILZ:
-			std::cout<<"ILZ"<<std::endl;
+			std::cout<<"Executing line ILZ"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			if (ALU.flagILZ())
 			{
 				MEM.set(PC,MEM.get(data));
@@ -132,7 +159,7 @@ int main()
 			break;
 
 			case IGE:
-			std::cout<<"IGE"<<std::endl;
+			std::cout<<"Executing line IGE"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			if (ALU.flagIGE())
 			{
 				MEM.set(PC,MEM.get(data));
@@ -140,20 +167,20 @@ int main()
 			break;
 
 			case ILE:
-			std::cout<<"ILE"<<std::endl;
+			std::cout<<"Executing line ILE"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			if (ALU.flagILE())
 			{
 				MEM.set(PC,MEM.get(data));
 			}
 			break;
 
-			case JMD:
-			std::cout<<"JMD"<<std::endl;
-			MEM.set(PC,data);
+			case JMA:
+			std::cout<<"Executing line JMA"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+			MEM.set(PC,ALU.getAcc());
 			break;
 
 			case STR:
-			std::cout<<"STR"<<std::endl;
+			std::cout<<"Executing line STR"<<std::hex<<MEM.get(PC)<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			MEM.set(MEM.get(data),ALU.getAcc());
 			break;
 
@@ -161,13 +188,30 @@ int main()
 			std::cout<<"Fell out of opcode case"<<std::endl;
 			break;
 		}
-		std::vector<int16_t> debugpoints {0x25,0x2A,0x2C,0x2D,0x2E,0x2F};
+
 		for(int i = 0;i<debugpoints.size();i++)
 		{
 			if (debugpoints[i] == executedline)
 			{
-				MEM.display(0x07EF,0x07FF);
+				dodebug = true;
 			}
 		}
+
+		if (dodebug)
+		{
+			std::cout<<"------------------------------------"<<std::endl;
+			std::cout<<"Accumulator is "<<ALU.getAcc()<<std::endl;
+			MEM.display(0x07EF,0x07FF);
+			std::cout<<"------------------------------------"<<std::endl;
+			char a;
+			std::cout<<"n -> next line\tother key -> next breakpoint"<<std::endl;
+			std::fflush(stdin);
+			std::cin.get(a);
+			if (a != 'n')
+			{
+				dodebug = false;
+			}
+		}
+		
 	}
 }

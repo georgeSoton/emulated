@@ -102,9 +102,9 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		{
 			opint = ILE;
 		}
-		else if (op == "JMD")
+		else if (op == "JMA")
 		{
-			opint = JMD;
+			opint = JMA;
 		}
 		else if (op == "STR")
 		{
@@ -142,6 +142,14 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		else if (data == "U1")
 		{
 			dataint = U1;
+		}
+		else if (data == "U2")
+		{
+			dataint = U2;
+		}
+		else if (data == "U3")
+		{
+			dataint = U3;
 		}
 		else
 		{
