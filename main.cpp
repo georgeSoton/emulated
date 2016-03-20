@@ -5,6 +5,7 @@
 #include "fileout.h"
 #include <string>
 #include <iostream>
+#include <vector>
 
 std::ofstream outputFile;
 int main()
@@ -26,7 +27,9 @@ int main()
 		int16_t currentinstruction = MEM.get(MEM.get(PC));
 		uint16_t opcode 	= (uint16_t)currentinstruction>>11;
 		int16_t data	= currentinstruction&0x07FF;
-		std::cout<<std::hex<<opcode<<", "<<data<<std::endl;
+		//std::cout<<std::hex<<opcode<<", "<<data<<std::endl;
+		std::cout<<"Executing line "<<std::hex<<MEM.get(PC)<<" ";
+		int16_t executedline = MEM.get(PC);
 		MEM.set(PC, MEM.get(PC)+1);	//Increment PC
 		if (opcode == END)
 		{
@@ -39,8 +42,8 @@ int main()
 			std::cout<<"NOP"<<std::endl;
 			break;
 
-			case STR:
-			std::cout<<"STR"<<std::endl;
+			case STA:
+			std::cout<<"STA"<<std::endl;
 			MEM.set(data,ALU.getAcc());
 			break;
 
@@ -149,9 +152,22 @@ int main()
 			MEM.set(PC,data);
 			break;
 
+			case STR:
+			std::cout<<"STR"<<std::endl;
+			MEM.set(MEM.get(data),ALU.getAcc());
+			break;
+
 			default:
 			std::cout<<"Fell out of opcode case"<<std::endl;
 			break;
+		}
+		std::vector<int16_t> debugpoints {0x25,0x2A,0x2C,0x2D,0x2E,0x2F};
+		for(int i = 0;i<debugpoints.size();i++)
+		{
+			if (debugpoints[i] == executedline)
+			{
+				MEM.display(0x07EF,0x07FF);
+			}
 		}
 	}
 }

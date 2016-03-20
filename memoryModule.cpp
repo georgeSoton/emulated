@@ -8,8 +8,8 @@ memoryModule::memoryModule()
 	{
 		memory[i]=0;
 	}
-	memory[SP] = 	0x7FC;
-	memory[BP] = 	0x7FC;
+	memory[SP] = 	0x7FB;
+	memory[BP] = 	0x7FB;
 	memory[PC] = 	0x000;
 }
 

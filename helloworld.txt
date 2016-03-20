@@ -15,14 +15,14 @@
 0E		d				*0064,
 0F		!				*0021,
 10		/0				*0000,
-11		string ptr		*0004,
+11		String ptr		*0004,
 12		load ptr		*LDR,011
 13		deref			*LDA,000
 14		if0 end			*IEZ,002
-15		print			*STR,OUT
+15		print			*STA,OUT
 16		reload ptr		*LDR,011
 17		increment		*ADD,003
-18		save			*STR,011
+18		save			*STA,011
 19		loop			*JMP,001
 1A						*NOP,0
 1B						*NOP,0

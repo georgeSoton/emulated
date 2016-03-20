@@ -30,9 +30,9 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		{
 			opint = NOP;
 		}
-		else if (op == "STR")
+		else if (op == "STA")
 		{
-			opint = STR;
+			opint = STA;
 		}
 		else if (op == "ADD")
 		{
@@ -106,6 +106,10 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		{
 			opint = JMD;
 		}
+		else if (op == "STR")
+		{
+			opint = STR;
+		}
 		else if (op == "END")
 		{
 			opint = END;
@@ -134,6 +138,10 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		else if (data == "OUT")
 		{
 			dataint = OUT;
+		}
+		else if (data == "U1")
+		{
+			dataint = U1;
 		}
 		else
 		{

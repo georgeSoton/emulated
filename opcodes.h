@@ -2,7 +2,7 @@
 #define OPCODES_H
 
 #define NOP 	0b00000
-#define STR		0b00001
+#define STA		0b00001
 #define ADD		0b00010
 #define SUB		0b00011
 #define MUL		0b00100
@@ -21,6 +21,7 @@
 #define IGE		0b10001
 #define ILE		0b10010
 #define JMD		0b10011
+#define STR		0b10100
 #define END		0b11111
 
 

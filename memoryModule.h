@@ -3,10 +3,11 @@
 
 #include <stdint.h>
 
-#define SP 0x7FF
-#define BP 0x7FE
-#define PC 0x7FD
-#define OUT 0x7FC
+#define SP 		0x7FF
+#define BP 		0x7FE
+#define PC 		0x7FD
+#define OUT 	0x7FC
+#define U1		0x7FB
 
 
 class memoryModule
@@ -17,7 +18,7 @@ public:
 	int16_t get(int16_t address);
 	void display(int16_t from, int16_t to);
 private:
-	int16_t memory[0x7FF];
+	int16_t memory[0x800];
 };
 
 #endif
