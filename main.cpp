@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 {
 	std::vector<int16_t> debugpoints;
 	bool dodebug	=	false;
+	int debuglen	=	0xF;
 	for(int i=1;i<argc;i++)
 	{
 		std::stringstream ss;
@@ -37,11 +38,24 @@ int main(int argc, char *argv[])
 				debugpoints.push_back(debugint);
 			}
 		}
+		else if (dump=="-l")
+		{
+				std::string val;
+				if(!std::getline(ss,val,' '))
+				{
+					break;
+				}
+				std::stringstream conv;
+				int16_t valint;
+				conv << val;
+				conv >>std::hex>>valint;
+				debuglen = valint;
+		}
 		else
 		{
 			std::cout<<std::endl;
-			std::cout<<"\t"<<dump<<" not recognised"<<std::endl;
-			std::cout<<"\t-Use -d,0,1,2,3 to get debug output on those lines (in hex)"<<std::endl;
+			std::cout<<"\t-d,0,1,2,3 | Get debug output on those lines (in hex)"<<std::endl;
+			std::cout<<"\t-l,0xF     | Length at end of memory to see"<<std::endl;
 			return 0;
 		}
 	}
@@ -207,11 +221,11 @@ int main(int argc, char *argv[])
 		if (dodebug)
 		{
 			std::cout<<"------------------------------------"<<std::endl;
-			std::cout<<"Accumulator is "<<ALU.getAcc()<<std::endl;
-			MEM.display(0x07EF,0x07FF);
+			MEM.display(0x07FF-debuglen,0x07FF);
+			std::cout<<"ACCUMULATOR ------| 0x"<<std::hex<<std::setfill('0')<<std::setw(4)<<ALU.getAcc()<<std::endl;
 			std::cout<<"------------------------------------"<<std::endl;
 			char a;
-			std::cout<<"n -> next line\tother key -> next breakpoint"<<std::endl;
+			std::cout<<"[N] NEXT LINE   |   [OTHER] NEXT BREAKPOINT"<<std::endl<<std::endl;
 			std::fflush(stdin);
 			std::cin.get(a);
 			if (a != 'n')

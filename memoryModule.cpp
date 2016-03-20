@@ -44,6 +44,7 @@ int16_t memoryModule::get(int16_t address)
 
 void memoryModule::display(int16_t from, int16_t to)
 {
+	std::cout<<" ADDR | NAME| PTRS| VALUE"<<std::endl;
 	for (int16_t i=from;i<=to;i++)
 	{
 
@@ -72,7 +73,7 @@ void memoryModule::display(int16_t from, int16_t to)
 			std::cout<<std::setfill('-')<<std::setw(5)<<"U3"<<"|";
 			break;
 			default:
-				std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
+			std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
 			break;
 		}
 		if (i == memory[SP])
