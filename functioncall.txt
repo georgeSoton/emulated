@@ -1,0 +1,68 @@
+00						*JMP,04
+01			Literal 10	*000A,
+02			Literal 3	*0009,
+03			Function ptr*0020,
+04			Main ptr	*0006,
+05						*NOP,0
+06			push arg 10 *LDR,01
+07						*SPI,0
+08				""		*STR,SP
+09	Return value space	*SPI,0
+0A			push PC+off	*LDR,PC
+0B						*ADD,02
+0C						*SPI,0
+0D				""		*STR,SP
+0E			push BP		*LDR,BP
+0F						*SPI,0
+10				""		*STR,SP
+11			update BP	*LDR,SP
+12						*STA,BP
+13			Call func	*JMP,03
+14	Load RV from Stack	*LDR,SP
+15			Deref		*LDA,0
+16			Output!		*STA,OUT
+17						*END,0
+18						*NOP,0
+19						*NOP,0
+1A						*NOP,0
+1B						*NOP,0
+1C						*NOP,0
+1D						*NOP,0
+1E			Literal 3	*0003,
+1F			Literal 2	*0002,
+20			FUNCTION	*NOP,0
+21		Fetch Arg ptr	*LDR,BP
+22		(BP+3)			*ADD,1E
+23		Deref			*LDA,0
+24		Store in U1		*STA,U1
+25		Square			*MUL,U1
+26		Store in U1		*STA,U1
+27		Fetch RV ptr	*LDR,BP
+28		(BP+2)			*ADD,1F
+29						*NOP,0
+2A		Store in U2		*STA,U2
+2B		Load Square		*LDR,U1
+2C		Store in RV(&U2)*STR,U2
+2D		Restore BP		*LDR,BP
+2E						*LDA,0
+2F						*STA,BP
+30		Pop				*SPD,0
+31		Load RA			*LDR,SP
+32						*LDA,0
+33		Pop				*SPD,0
+34		Jump back		*JMA,0
+35						*
+36						*
+37						*
+38						*
+39						*
+3A						*
+3B						*
+3C						*
+3D						*
+3E						*
+3F						*
+40						*
+41						*
+42						*
+43						*
