@@ -4,27 +4,32 @@
 #include "fileout.h"
 memoryModule::memoryModule()
 {
-	for(int i=0;i<=0x7FF;i++)
-	{
-		memory[i]=0;
-	}
-	memory[SP] = 	0x7F9;
-	memory[BP] = 	0x7F9;
-	memory[PC] = 	0x000;
+	video videoModule = video();
+	ram ramModule = ram();
+	ramModule.set(SP,U3);
+	ramModule.set(BP,U3);
+	ramModule.set(PC,0);
 }
 
 void memoryModule::set(int16_t address, int16_t value)
 {
 	if ((address > 0x7FF) || (address < 0))
 	{
-		std::cout<<"Invalid address specified for set: "<<address<<std::endl;
+		debugFile<<"Invalid address specified for set: "<<address<<std::endl;
 		return;
 	}
 	if (address == OUT)
 	{
 		outputFile<<(char)value;
 	}
-	memory[address] = value;
+	else if ((address >= VIDEOBOT) && (address <= VIDEOTOP))	//VIDEO SECTOR
+	{
+		videoModule.setline(address-VIDEOBOT,value);
+	}
+	else if (address<RAMLENGTH)
+	{
+		ramModule.set(address,value);
+	}
 	return;
 }
 
@@ -32,14 +37,22 @@ int16_t memoryModule::get(int16_t address)
 {
 	if ((address > 0x7FF) || (address < 0))
 	{
-		std::cout<<"Invalid address specified for get: "<<address<<std::endl;
+		debugFile<<"Invalid address specified for get: "<<address<<std::endl;
 		return 0;
 	}
 	if (address == OUT)
 	{
-		std::cout<<"Tried to read from protected OUT address"<<std::endl;
+		debugFile<<"Tried to read from protected OUT address"<<std::endl;
 	}
-	return memory[address];
+	else if ((address >= VIDEOBOT) && (address <= VIDEOTOP)) //VIDEO SECTOR
+	{
+		debugFile<<"Tried to read from protected VIDEO address"<<std::endl;
+	}
+	else if (address < RAMLENGTH)
+	{
+		return ramModule.get(address);
+	}
+	return 0;
 }
 
 void memoryModule::display(int16_t from, int16_t to)
@@ -76,9 +89,9 @@ void memoryModule::display(int16_t from, int16_t to)
 			std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
 			break;
 		}
-		if (i == memory[SP])
+		if (i == ramModule.get(SP))
 		{
-			if (memory[SP]==memory[BP])
+			if (ramModule.get(SP)==ramModule.get(BP))
 			{
 				std::cout<<std::setfill('-')<<std::setw(5)<<"SP|BP"<<"|";
 			}
@@ -87,7 +100,7 @@ void memoryModule::display(int16_t from, int16_t to)
 				std::cout<<std::setfill('-')<<std::setw(5)<<"SP"<<"|";
 			}
 		}
-		else if (i == memory[BP])
+		else if (i == ramModule.get(BP))
 		{
 			std::cout<<std::setfill('-')<<std::setw(5)<<"BP"<<"|";
 		}
@@ -95,6 +108,12 @@ void memoryModule::display(int16_t from, int16_t to)
 		{
 			std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
 		}
-		std::cout<<std::setfill('0')<<" "<<"0x"<<std::setw(4)<<memory[i]<<std::dec<<std::endl;
+		std::cout<<std::setfill('0')<<" "<<"0x"<<std::setw(4)<<ramModule.get(i)<<std::dec<<std::endl;
 	}
+}
+
+void memoryModule::draw()
+{
+	videoModule.draw();
+	return;
 }
