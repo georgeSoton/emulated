@@ -1,4 +1,5 @@
 #include "ram.h"
+#include <iostream>
 
 ram::ram()
 {

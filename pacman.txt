@@ -1,0 +1,253 @@
+00					*JMP,01
+01					*AA,
+02					*NOP,0
+03					*NOP,0
+04					*NOP,0
+05					*NOP,0
+06					*NOP,0
+07					*NOP,0
+08					*NOP,0
+09					*NOP,0
+0A					*NOP,0
+0B					*NOP,0
+0C					*NOP,0
+0D					*NOP,0
+0E					*NOP,0
+0F					*NOP,0
+10					*NOP,0
+11					*1C,
+12					*19,
+13					*01,
+14					*03,
+15	Delay func		*LDR,BP
+16					*ADD,14
+17	Load arg		*LDA,0
+18					*NOP,0
+19	Decrement		*SUB,13
+1A	Ifzero jump		*ILE,11
+1B					*JMP,12
+1C	Restore BP		*LDR,BP
+1D					*LDA,0
+1E					*STA,BP
+1F					*LDR,SP
+20					*LDA,0
+21					*SPD,0
+22					*STA,PC
+23					*NOP,0
+24					*NOP,0
+25					*NOP,0
+26					*NOP,0
+27					*NOP,0
+28					*NOP,0
+29 -----xxxxxx----- *07E0,
+2A ---xxxxxxxxxx--- *1FF8,
+2B --xxxxxxxxxxxx-- *3FFC,
+2C -xxxxxxxxxxxxxx- *7FFE,
+2D -xxxxxxxxxxxxxx- *7FFE,
+2E xxxxxxxxxxx--xxx *FFE7,
+2F xxxxxxxxxxx--xxx *FFE7,
+30 xxxxxxxxxxxxxxxx *FFFF,
+31 xxxxxxxxxxxxxxxx *FFFF,
+32 xxxxxxxxxxxxxxxx *FFFF,
+33 xxxxxxxxxxxxxxxx *FFFF,
+34 -xxxxxxxxxxxxxx- *7FFE,
+35 -xxxxxxxxxxxxxx- *7FFE,
+36 --xxxxxxxxxxxx-- *3FFC,
+37 ---xxxxxxxxxx--- *1FF8,
+38 -----xxxxxx----- *07E0,
+39	 Draw closed	*LDR,29
+3A					*STA,7FE
+3B					*LDR,2A
+3C					*STA,7FD
+3D					*LDR,2B
+3E					*STA,7FC
+3F					*LDR,2C
+40					*STA,7FB
+41					*LDR,2D
+42					*STA,7FA
+43					*LDR,2E
+44					*STA,7F9
+45					*LDR,2F
+46					*STA,7F8
+47					*LDR,30
+48					*STA,7F7
+49					*LDR,31
+4A					*STA,7F6
+4B					*LDR,32
+4C					*STA,7F5
+4D					*LDR,33
+4E					*STA,7F4
+4F					*LDR,34
+50					*STA,7F3
+51					*LDR,35
+52					*STA,7F2
+53					*LDR,36
+54					*STA,7F1
+55					*LDR,37
+56					*STA,7F0
+57					*LDR,38
+58					*STA,7EF
+59	  Restore BP	*LDR,SP
+5A					*LDA,0
+5B					*STA,BP
+5C					*SPD,0
+5D		Load RA		*LDR,SP
+5E					*LDA,0
+5F		Return		*SPD,0
+60					*STA,PC
+61					*NOP,0
+62					*NOP,0
+63 -----xxxxxx----- *07E0,
+64 ---xxxxxxxxxx--- *1FF8,
+65 --xxxxxx--xxxx-- *3F3C,
+66 -xxxxxxx--xxxxx- *7F3E,
+67 -xxxxxxxxxxxx--- *7FF8,
+68 xxxxxxxxxxx----- *FFE0,
+69 xxxxxxxxx------- *FF80,
+6A xxxxxxxx-------- *FF00,
+6B xxxxxxxx-------- *FF00,
+6C xxxxxxxxx------- *FF80,
+6D xxxxxxxxxxx----- *FFE0,
+6E -xxxxxxxxxxxx--- *7FF8,
+6F -xxxxxxxxxxxxxx- *7FFE,
+70 --xxxxxxxxxxxx-- *3FFC,
+71 ---xxxxxxxxxx--- *1FF8,
+72 -----xxxxxx----- *07E0,
+73 Draw open		*LDR,63
+74					*STA,7FE
+75					*LDR,64
+76					*STA,7FD
+77					*LDR,65
+78					*STA,7FC
+79					*LDR,66
+7A					*STA,7FB
+7B					*LDR,67
+7C					*STA,7FA
+7D					*LDR,68
+7E					*STA,7F9
+7F					*LDR,69
+80					*STA,7F8
+81					*LDR,6A
+82					*STA,7F7
+83					*LDR,6B
+84					*STA,7F6
+85					*LDR,6C
+86					*STA,7F5
+87					*LDR,6D
+88					*STA,7F4
+89					*LDR,6E
+8A					*STA,7F3
+8B					*LDR,6F
+8C					*STA,7F2
+8D					*LDR,70
+8E					*STA,7F1
+8F					*LDR,71
+90					*STA,7F0
+91					*LDR,72
+92					*STA,7EF
+93  Restore BP		*LDR,SP
+94					*LDA,0
+95					*STA,BP
+96					*SPD,0
+97	Load RA			*LDR,SP
+98					*LDA,0
+99	Return			*SPD,0
+9A					*STA,SP63
+9B					*NOP,0
+9C					*NOP,0
+9D					*NOP,0
+9E					*NOP,0
+9F					*NOP,0
+A0					*NOP,0
+A1					*NOP,0
+A2					*NOP,0
+A3					*NOP,0
+A4					*NOP,0
+A5					*NOP,0
+A6	Func 2 ptr		*73,
+A7	Call 2 RA		*BA,
+A8	Func 1 ptr		*39,
+A9	Call 1 RA		*B2,
+AA	MAIN			*LDR,A9
+AB	Push return adr	*SPI,0
+AC					*SPI,0
+AD					*STR,SP
+AE					*LDR,BP
+AF					*SPI,0
+B0	Push BP			*STR,SP
+B1	Call closed		*JMP,A8
+B2					*LDR,A7
+B3	Push return adr	*SPI,0
+B4					*SPI,0
+B5					*STR,SP
+B6	Push BP			*LDR,BP
+B7					*SPI,0
+B8					*STR,SP
+B9	Call open		*JMP,A6
+BA	Loop			*JMP,01
+BB					*NOP,0
+BC					*NOP,0
+BD					*NOP,0
+BE					*NOP,0
+BF					*NOP,0
+C0					*NOP,0
+C1					*NOP,0
+C2					*NOP,0
+C3					*NOP,0
+C4					*NOP,0
+C5					*NOP,0
+C6					*NOP,0
+C7					*NOP,0
+C8					*NOP,0
+C9					*NOP,0
+CA					*NOP,0
+CB					*NOP,0
+CC					*NOP,0
+CD					*NOP,0
+CE					*NOP,0
+CF					*NOP,0
+D0					*NOP,0
+D1					*NOP,0
+D2					*NOP,0
+D3					*NOP,0
+D4					*NOP,0
+D5					*NOP,0
+D6					*NOP,0
+D7					*NOP,0
+D8					*NOP,0
+D9					*NOP,0
+DA					*NOP,0
+DB					*NOP,0
+DC					*NOP,0
+DD					*NOP,0
+DE					*NOP,0
+DF					*NOP,0
+E0					*NOP,0
+E1					*NOP,0
+E2					*NOP,0
+E3					*NOP,0
+E4					*NOP,0
+E5					*NOP,0
+E6					*NOP,0
+E7					*NOP,0
+E8					*NOP,0
+E9					*NOP,0
+EA					*NOP,0
+EB					*NOP,0
+EC					*NOP,0
+ED					*NOP,0
+EE					*NOP,0
+EF					*NOP,0
+F0					*NOP,0
+F1					*NOP,0
+F2					*NOP,0
+F3					*NOP,0
+F4					*NOP,0
+F5					*NOP,0
+F6					*NOP,0
+F7					*NOP,0
+F8					*NOP,0
+F9					*NOP,0
+FA					*NOP,0
+FB					*NOP,0
+FC					*NOP,0

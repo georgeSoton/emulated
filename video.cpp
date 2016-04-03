@@ -11,14 +11,13 @@ video::video()
 
 void video::setline(int line,int16_t value)
 {
-	std::cout<<"SETLINE CALLED";
 	lines[line]=value;
 }
 
 void video::draw()
 {
 	std::system("cls");
-	for(int i=0;i<16;i++)
+	for(int i=15;i>=0;i--)
 	{
 		for(int j=15;j>=0;j--)
 		{

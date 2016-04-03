@@ -4,8 +4,8 @@
 #include "fileout.h"
 memoryModule::memoryModule()
 {
-	video videoModule = video();
-	ram ramModule = ram();
+	videoModule = video();
+	ramModule = ram();
 	ramModule.set(SP,U3);
 	ramModule.set(BP,U3);
 	ramModule.set(PC,0);
