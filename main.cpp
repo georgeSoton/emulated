@@ -74,7 +74,6 @@ int main(int argc, char *argv[])
 			return 0;
 		}
 	}
-
 	std::cout<<"What program would you like to run?"<<std::endl;
 	std::cout<<"> ";
 	std::string filename;
@@ -83,12 +82,13 @@ int main(int argc, char *argv[])
 	debugFile.open(("debug_"+filename).c_str());
 
 	memoryModule MEM = memoryModule();
+	MEM.setDraw(video);
 	parser PARSER = parser(&MEM);
 	alu ALU = alu();
-
 	PARSER.loadFromFile(filename.c_str(),0);
 	while(1)
 	{
+		Sleep(1);
 		int16_t currentinstruction = MEM.get(MEM.get(PC));
 		uint16_t opcode 	= (uint16_t)currentinstruction>>11;
 		int16_t data	= currentinstruction&0x07FF;
@@ -303,7 +303,7 @@ int main(int argc, char *argv[])
 		if (dodebug)
 		{
 			std::cout<<"------------------------------------"<<std::endl;
-			MEM.display(RAMLENGTH-debuglen,RAMLENGTH);
+			MEM.display(RAMLENGTH-1-debuglen,RAMLENGTH-1);
 			std::cout<<"ACCUMULATOR ------| 0x"<<std::hex<<std::setfill('0')<<std::setw(4)<<ALU.getAcc()<<std::endl;
 			std::cout<<"------------------------------------"<<std::endl;
 			char a;
@@ -315,10 +315,5 @@ int main(int argc, char *argv[])
 				dodebug = false;
 			}
 		}
-		if (video)
-		{
-			MEM.draw();
-		}
-		
 	}
 }

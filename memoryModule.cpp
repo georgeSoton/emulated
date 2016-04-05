@@ -9,6 +9,7 @@ memoryModule::memoryModule()
 	ramModule.set(SP,U3);
 	ramModule.set(BP,U3);
 	ramModule.set(PC,0);
+	drawing = true;
 }
 
 void memoryModule::set(int16_t address, int16_t value)
@@ -22,9 +23,13 @@ void memoryModule::set(int16_t address, int16_t value)
 	{
 		outputFile<<(char)value;
 	}
-	else if ((address >= VIDEOBOT) && (address <= VIDEOTOP))	//VIDEO SECTOR
+	else if ((address > VIDEOBOT) && (address <= VIDEOTOP))	//VIDEO SECTOR
 	{
 		videoModule.setline(address-VIDEOBOT,value);
+	}
+	else if (address == VIDEOBOT)
+	{
+		if (drawing) videoModule.draw();
 	}
 	else if (address<RAMLENGTH)
 	{
@@ -112,8 +117,8 @@ void memoryModule::display(int16_t from, int16_t to)
 	}
 }
 
-void memoryModule::draw()
+void memoryModule::setDraw(bool state)
 {
-	videoModule.draw();
+	drawing = state;
 	return;
 }
