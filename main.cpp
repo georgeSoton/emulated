@@ -112,10 +112,10 @@ int main(int argc, char *argv[])
 			}
 			break;
 
-			case STA:
+			case STD:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | STA"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | STD"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			}
 			MEM.set(data,ALU.getAcc());
 			break;
@@ -192,10 +192,10 @@ int main(int argc, char *argv[])
 			MEM.set(SP,MEM.get(SP)+1);
 			break;
 
-			case JMP:
+			case JMR:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | JMP"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | JMR"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
 			}
 			MEM.set(PC,MEM.get(data));
 			break;

@@ -1,4 +1,4 @@
-00					*JMP,01
+00					*JMR,01
 01					*AA,
 02					*NOP,0
 03					*NOP,0
@@ -25,15 +25,15 @@
 18					*NOP,0
 19	Decrement		*SUB,13
 1A	Ifzero jump		*ILE,11
-1B					*JMP,12
+1B					*JMR,12
 1C	Restore BP		*LDR,BP
 1D					*LDA,0
-1E					*STA,BP
+1E					*STD,BP
 1F					*SPD,0
 20					*LDR,SP
 21					*LDA,0
 22					*SPD,0
-23					*STA,PC
+23					*STD,PC
 24					*NOP,0
 25					*NOP,0
 26					*NOP,0
@@ -56,46 +56,46 @@
 37 ---xxxxxxxxxx--- *1FF8,
 38 -----xxxxxx----- *07E0,
 39	 Draw closed	*LDR,29
-3A					*STA,7FE
+3A					*STD,7FE
 3B					*LDR,2A
-3C					*STA,7FD
+3C					*STD,7FD
 3D					*LDR,2B
-3E					*STA,7FC
+3E					*STD,7FC
 3F					*LDR,2C
-40					*STA,7FB
+40					*STD,7FB
 41					*LDR,2D
-42					*STA,7FA
+42					*STD,7FA
 43					*LDR,2E
-44					*STA,7F9
+44					*STD,7F9
 45					*LDR,2F
-46					*STA,7F8
+46					*STD,7F8
 47					*LDR,30
-48					*STA,7F7
+48					*STD,7F7
 49					*LDR,31
-4A					*STA,7F6
+4A					*STD,7F6
 4B					*LDR,32
-4C					*STA,7F5
+4C					*STD,7F5
 4D					*LDR,33
-4E					*STA,7F4
+4E					*STD,7F4
 4F					*LDR,34
-50					*STA,7F3
+50					*STD,7F3
 51					*LDR,35
-52					*STA,7F2
+52					*STD,7F2
 53					*LDR,36
-54					*STA,7F1
+54					*STD,7F1
 55					*LDR,37
-56					*STA,7F0
+56					*STD,7F0
 57					*LDR,38
-58					*STA,7EF
+58					*STD,7EF
 59	  Restore BP	*LDR,SP
 5A					*LDA,0
-5B					*STA,BP
+5B					*STD,BP
 5C					*SPD,0
 5D		Load RA		*LDR,SP
 5E					*LDA,0
 5F		Return		*SPD,0
 60					*NOP,0
-61					*STA,PC
+61					*STD,PC
 62					*NOP,0
 63 -----xxxxxx----- *07E0,
 64 ---xxxxxxxxxx--- *1FF8,
@@ -114,46 +114,46 @@
 71 ---xxxxxxxxxx--- *1FF8,
 72 -----xxxxxx----- *07E0,
 73 Draw open		*LDR,63
-74					*STA,7FE
+74					*STD,7FE
 75					*LDR,64
-76					*STA,7FD
+76					*STD,7FD
 77					*LDR,65
-78					*STA,7FC
+78					*STD,7FC
 79					*LDR,66
-7A					*STA,7FB
+7A					*STD,7FB
 7B					*LDR,67
-7C					*STA,7FA
+7C					*STD,7FA
 7D					*LDR,68
-7E					*STA,7F9
+7E					*STD,7F9
 7F					*LDR,69
-80					*STA,7F8
+80					*STD,7F8
 81					*LDR,6A
-82					*STA,7F7
+82					*STD,7F7
 83					*LDR,6B
-84					*STA,7F6
+84					*STD,7F6
 85					*LDR,6C
-86					*STA,7F5
+86					*STD,7F5
 87					*LDR,6D
-88					*STA,7F4
+88					*STD,7F4
 89					*LDR,6E
-8A					*STA,7F3
+8A					*STD,7F3
 8B					*LDR,6F
-8C					*STA,7F2
+8C					*STD,7F2
 8D					*LDR,70
-8E					*STA,7F1
+8E					*STD,7F1
 8F					*LDR,71
-90					*STA,7F0
+90					*STD,7F0
 91					*LDR,72
-92					*STA,7EF
+92					*STD,7EF
 93  Restore BP		*LDR,SP
 94					*LDA,0
-95					*STA,BP
+95					*STD,BP
 96					*SPD,0
 97	Load RA			*LDR,SP
 98					*LDA,0
 99	Return			*SPD,0
 9A					*NOP,0
-9B					*STA,PC
+9B					*STD,PC
 9C					*NOP,0
 9D					*NOP,0
 9E					*NOP,0
@@ -176,10 +176,10 @@ AE  				*LDR,BP
 AF  				*SPI,0
 B0  Push BP			*STR,SP
 B1  New BP			*LDR,SP
-B2  				*STA,BP
-B3  Call closed		*JMP,A8
+B2  				*STD,BP
+B3  Call closed		*JMR,A8
 B4  				*SPD,0
-B5  Draw			*STA,7EE
+B5  Draw			*STD,7EE
 B6   				*NOP,0
 B7   				*NOP,0
 B8   				*LDR,A4
@@ -193,8 +193,8 @@ BF   				*LDR,BP
 C0   				*SPI,0
 C1    Push BP		*STR,SP
 C2    New BP		*LDR,SP
-C3   				*STA,BP
-C4    Call delay	*JMP,A5
+C3   				*STD,BP
+C4    Call delay	*JMR,A5
 C5  				*SPD,0
 C6    				*SPD,0
 C7    				*LDR,A7
@@ -204,9 +204,9 @@ CA    				*STR,SP
 CB    Push BP		*LDR,BP
 CC    				*SPI,0
 CD    				*STR,SP
-CE    Call open		*JMP,A6
+CE    Call open		*JMR,A6
 CF  				*SPD,0
-D0    Draw			*STA,7EE
+D0    Draw			*STD,7EE
 D1    				*NOP,0
 D2    				*NOP,0
 D3    				*NOP,0
@@ -222,11 +222,11 @@ DC    				*SPI,0
 DD    				*LDR,BP
 DE    Push BP		*STR,SP
 DF    New BP		*LDR,SP
-E0    				*STA,BP
-E1    Call Delay	*JMP,A5
+E0    				*STD,BP
+E1    Call Delay	*JMR,A5
 E2    				*SPD,0
 E3    				*SPD,0
-E4    				*JMP,01
+E4    				*JMR,01
 E5    				*NOP,0
 E6    				*NOP,0
 E7    				*NOP,0

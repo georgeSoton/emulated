@@ -1,5 +1,5 @@
-00						*JMP,001
-01		Code start ptr	*0012,
+00						*JMR,001
+01		Code STDrt ptr	*0012,
 02		End ptr			*0020,
 03		1 literal		*0001,
 04		H				*0048,
@@ -19,11 +19,11 @@
 12		load ptr		*LDR,011
 13		deref			*LDA,000
 14		if0 end			*IEZ,002
-15		print			*STA,OUT
+15		print			*STD,OUT
 16		reload ptr		*LDR,011
 17		increment		*ADD,003
-18		save			*STA,011
-19		loop			*JMP,001
+18		save			*STD,011
+19		loop			*JMR,001
 1A						*NOP,0
 1B						*NOP,0
 1C						*NOP,0

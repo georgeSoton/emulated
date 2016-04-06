@@ -30,9 +30,9 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		{
 			opint = NOP;
 		}
-		else if (op == "STA")
+		else if (op == "STD")
 		{
-			opint = STA;
+			opint = STD;
 		}
 		else if (op == "ADD")
 		{
@@ -70,9 +70,9 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		{
 			opint = SPD;
 		}
-		else if (op == "JMP")
+		else if (op == "JMR")
 		{
-			opint = JMP;
+			opint = JMR;
 		}
 		else if (op == "LDA")
 		{

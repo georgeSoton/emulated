@@ -2,7 +2,7 @@
 #define OPCODES_H
 
 #define NOP 	0b00000	//NOP,0 - No OP
-#define STA		0b00001	//STA,X - Store acc in address X
+#define STD		0b00001	//STA,X - Store acc in address X
 #define ADD		0b00010	//ADD,X - Add the value in address X to the acc
 #define SUB		0b00011	//SUB,X - Subract the value in address X from the acc
 #define MUL		0b00100 //MUL,X
@@ -12,7 +12,7 @@
 #define ORR		0b01000 //ORR,X
 #define SPI		0b01001 //SPI,0 - Raise Stack Pointer
 #define SPD		0b01010 //SPD,0 - Lower Stack Pointer
-#define	JMP		0b01011 //JMP,X - Jump to the address stored in X
+#define	JMR		0b01011 //JMP,X - Jump to the address stored in X
 #define LDA		0b01100 //LDA,0	- Load the address in the acc into the acc (dereference)
 #define LDR		0b01101 //LDR,X	- Load the value stored at address X into the acc
 #define IEZ		0b01110	//IEZ,X - If acc=0, branch to the value in address X
