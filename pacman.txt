@@ -1,275 +1,278 @@
-00					*JMR,01
-01					*AA,
-02					*NOP,0
-03					*NOP,0
-04					*NOP,0
-05					*NOP,0
-06					*NOP,0
-07					*NOP,0
-08					*NOP,0
-09					*NOP,0
-0A					*NOP,0
-0B					*NOP,0
-0C					*NOP,0
-0D					*NOP,0
-0E					*NOP,0
-0F					*NOP,0
-10					*NOP,0
-11					*1C,
-12					*19,
-13					*01,
-14					*03,
-15	Delay func		*LDR,BP
-16					*ADD,14
-17	Load arg		*LDA,0
-18					*NOP,0
-19	Decrement		*SUB,13
-1A	Ifzero jump		*ILE,11
-1B					*JMR,12
-1C	Restore BP		*LDR,BP
-1D					*LDA,0
-1E					*STD,BP
-1F					*SPD,0
-20					*LDR,SP
-21					*LDA,0
-22					*SPD,0
-23					*STD,PC
-24					*NOP,0
-25					*NOP,0
-26					*NOP,0
-27					*NOP,0
-28					*NOP,0
-29 -----xxxxxx----- *07E0,
-2A ---xxxxxxxxxx--- *1FF8,
-2B --xxxxxxxxxxxx-- *3FFC,
-2C -xxxxxxxxxxxxxx- *7FFE,
-2D -xxxxxxxxxxxxxx- *7FFE,
-2E xxxxxxxxxxx--xxx *FFE7,
-2F xxxxxxxxxxx--xxx *FFE7,
-30 xxxxxxxxxxxxxxxx *FFFF,
-31 xxxxxxxxxxxxxxxx *FFFF,
-32 xxxxxxxxxxxxxxxx *FFFF,
-33 xxxxxxxxxxxxxxxx *FFFF,
-34 -xxxxxxxxxxxxxx- *7FFE,
-35 -xxxxxxxxxxxxxx- *7FFE,
-36 --xxxxxxxxxxxx-- *3FFC,
-37 ---xxxxxxxxxx--- *1FF8,
-38 -----xxxxxx----- *07E0,
-39	 Draw closed	*LDR,29
-3A					*STD,7FE
-3B					*LDR,2A
-3C					*STD,7FD
-3D					*LDR,2B
-3E					*STD,7FC
-3F					*LDR,2C
-40					*STD,7FB
-41					*LDR,2D
-42					*STD,7FA
-43					*LDR,2E
-44					*STD,7F9
-45					*LDR,2F
-46					*STD,7F8
-47					*LDR,30
-48					*STD,7F7
-49					*LDR,31
-4A					*STD,7F6
-4B					*LDR,32
-4C					*STD,7F5
-4D					*LDR,33
-4E					*STD,7F4
-4F					*LDR,34
-50					*STD,7F3
-51					*LDR,35
-52					*STD,7F2
-53					*LDR,36
-54					*STD,7F1
-55					*LDR,37
-56					*STD,7F0
-57					*LDR,38
-58					*STD,7EF
-59	  Restore BP	*LDR,SP
-5A					*LDA,0
-5B					*STD,BP
-5C					*SPD,0
-5D		Load RA		*LDR,SP
-5E					*LDA,0
-5F		Return		*SPD,0
-60					*NOP,0
-61					*STD,PC
-62					*NOP,0
-63 -----xxxxxx----- *07E0,
-64 ---xxxxxxxxxx--- *1FF8,
-65 --xxxxxx--xxxx-- *3F3C,
-66 -xxxxxxx--xxxxx- *7F3E,
-67 -xxxxxxxxxxxx--- *7FF8,
-68 xxxxxxxxxxx----- *FFE0,
-69 xxxxxxxxx------- *FF80,
-6A xxxxxxxx-------- *FF00,
-6B xxxxxxxx-------- *FF00,
-6C xxxxxxxxx------- *FF80,
-6D xxxxxxxxxxx----- *FFE0,
-6E -xxxxxxxxxxxx--- *7FF8,
-6F -xxxxxxxxxxxxxx- *7FFE,
-70 --xxxxxxxxxxxx-- *3FFC,
-71 ---xxxxxxxxxx--- *1FF8,
-72 -----xxxxxx----- *07E0,
-73 Draw open		*LDR,63
-74					*STD,7FE
-75					*LDR,64
-76					*STD,7FD
-77					*LDR,65
-78					*STD,7FC
-79					*LDR,66
-7A					*STD,7FB
-7B					*LDR,67
-7C					*STD,7FA
-7D					*LDR,68
-7E					*STD,7F9
-7F					*LDR,69
-80					*STD,7F8
-81					*LDR,6A
-82					*STD,7F7
-83					*LDR,6B
-84					*STD,7F6
-85					*LDR,6C
-86					*STD,7F5
-87					*LDR,6D
-88					*STD,7F4
-89					*LDR,6E
-8A					*STD,7F3
-8B					*LDR,6F
-8C					*STD,7F2
-8D					*LDR,70
-8E					*STD,7F1
-8F					*LDR,71
-90					*STD,7F0
-91					*LDR,72
-92					*STD,7EF
-93  Restore BP		*LDR,SP
-94					*LDA,0
-95					*STD,BP
-96					*SPD,0
-97	Load RA			*LDR,SP
-98					*LDA,0
-99	Return			*SPD,0
-9A					*NOP,0
-9B					*STD,PC
-9C					*NOP,0
-9D					*NOP,0
-9E					*NOP,0
-9F					*NOP,0
-A0					*NOP,0
-A1					*NOP,0
-A2	Delay 2 RA		*E2,
-A3	Delay 1 RA		*C5,
-A4	Delay arg		*30,
-A5	Delay addr		*15,
-A6	Func 2 ptr		*73,
-A7	Call 2 RA		*CF,
-A8	Func 1 ptr		*39,
-A9	Call 1 RA		*B4,n
-AA	MAIN			*LDR,A9
-AB  Push return adr	*SPI,0
-AC  				*SPI,0
-AD  				*STR,SP
-AE  				*LDR,BP
-AF  				*SPI,0
-B0  Push BP			*STR,SP
-B1  New BP			*LDR,SP
-B2  				*STD,BP
-B3  Call closed		*JMR,A8
-B4  				*SPD,0
-B5  Draw			*STD,7EE
-B6   				*NOP,0
-B7   				*NOP,0
-B8   				*LDR,A4
-B9   				*SPI,0
-BA   Push arg		*STR,SP
-BB   				*SPI,0
-BC   				*SPI,0
-BD   				*LDR,A3
-BE   Push RA		*STR,SP
-BF   				*LDR,BP
-C0   				*SPI,0
-C1    Push BP		*STR,SP
-C2    New BP		*LDR,SP
-C3   				*STD,BP
-C4    Call delay	*JMR,A5
-C5  				*SPD,0
-C6    				*SPD,0
-C7    				*LDR,A7
-C8  Push return adr	*SPI,0
-C9    				*SPI,0
-CA    				*STR,SP
-CB    Push BP		*LDR,BP
-CC    				*SPI,0
-CD    				*STR,SP
-CE    Call open		*JMR,A6
-CF  				*SPD,0
-D0    Draw			*STD,7EE
-D1    				*NOP,0
-D2    				*NOP,0
-D3    				*NOP,0
-D4    				*NOP,0
-D5    				*SPI,0
-D6    				*LDR,A4
-D7    Push arg		*STR,SP
-D8    				*SPI,0
-D9    				*SPI,0
-DA    				*LDR,A2
-DB    Push RA		*STR,SP
-DC    				*SPI,0
-DD    				*LDR,BP
-DE    Push BP		*STR,SP
-DF    New BP		*LDR,SP
-E0    				*STD,BP
-E1    Call Delay	*JMR,A5
-E2    				*SPD,0
-E3    				*SPD,0
-E4    				*JMR,01
-E5    				*NOP,0
-E6    				*NOP,0
-E7    				*NOP,0
-E8    				*NOP,0
-E9    				*NOP,0
-EA    				*NOP,0
-EB    				*NOP,0
-EC    				*NOP,0
-ED    				*NOP,0
-EE    				*NOP,0
-EF    				*NOP,0
-F0    				*NOP,0
-F1    				*NOP,0
-F2    				*NOP,0
-F3    				*NOP,0
-F4    				*NOP,0
-F5    				*NOP,0
-F6    				*NOP,0
-F7    				*NOP,0
-F8    				*NOP,0
-F9    				*NOP,0
-FA    				*NOP,0
-FB    				*NOP,0
-FC    				*NOP,0
-FD    				*NOP,0
-FE    				*NOP,0
-FF    				*NOP,0
-100   				*NOP,0
-101   				*NOP,0
-102   				*NOP,0
-103  				*NOP,0
-104  				*NOP,0
-105 				*NOP,0
-106 				*NOP,0
-107 				*NOP,0
-108 				*NOP,0
-109 				*NOP,0
-10A 				*NOP,0
-10B 				*NOP,0
-10C 				*NOP,0
-10D 				*NOP,0
-10E 				*NOP,0
-10F 				*NOP,0
-110 				*NOP,0
-111 				*NOP,0
-112 				*NOP,0
+0000%	JMR 01
+0001%	AA 
+0002%	NOP 0
+0003%	NOP 0
+0004%	NOP 0
+0005%	NOP 0
+0006%	NOP 0
+0007%	NOP 0
+0008%	NOP 0
+0009%	NOP 0
+000A%	NOP 0
+000B%	NOP 0
+000C%	NOP 0
+000D%	NOP 0
+000E%	NOP 0
+000F%	NOP 0
+0010%	NOP 0
+0011%	1C 
+0012%	19 
+0013%	01 
+0014%	03 
+0015%	LDR BP		Delay func
+0016%	ADD 14
+0017%	LDA 0		Load arg
+0018%	NOP 0
+0019%	SUB 13		Decrement	
+001A%	ILE 11		Ifzero jump	
+001B%	JMR 12
+001C%	LDR BP		Restore BP
+001D%	LDA 0
+001E%	STD BP
+001F%	SPD 0
+0020%	LDR SP
+0021%	LDA 0
+0022%	SPD 0
+0023%	STD PC
+0024%	NOP 0
+0025%	NOP 0
+0026%	NOP 0
+0027%	NOP 0
+0028%	NOP 0
+0029%	07E0 		-----xxxxxx-----
+002A%	1FF8 		---xxxxxxxxxx---
+002B%	3FFC 		--xxxxxxxxxxxx--
+002C%	7FFE 		-xxxxxxxxxxxxxx-
+002D%	7FFE 		-xxxxxxxxxxxxxx- 
+002E%	FFE7 		xxxxxxxxxxx--xxx
+002F%	FFE7 		xxxxxxxxxxx--xxx
+0030%	FFFF 		xxxxxxxxxxxxxxxx
+0031%	FFFF 		xxxxxxxxxxxxxxxx
+0032%	FFFF 		xxxxxxxxxxxxxxxx
+0033%	FFFF 		xxxxxxxxxxxxxxxx
+0034%	7FFE 		-xxxxxxxxxxxxxx-
+0035%	7FFE 		-xxxxxxxxxxxxxx-
+0036%	3FFC 		--xxxxxxxxxxxx--
+0037%	1FF8 		---xxxxxxxxxx--- 
+0038%	07E0 		-----xxxxxx-----
+0039%	LDR 29		Draw closed
+003A%	STD 7FE
+003B%	LDR 2A
+003C%	STD 7FD
+003D%	LDR 2B
+003E%	STD 7FC
+003F%	LDR 2C
+0040%	STD 7FB
+0041%	LDR 2D
+0042%	STD 7FA
+0043%	LDR 2E
+0044%	STD 7F9
+0045%	LDR 2F
+0046%	STD 7F8
+0047%	LDR 30
+0048%	STD 7F7
+0049%	LDR 31
+004A%	STD 7F6
+004B%	LDR 32
+004C%	STD 7F5
+004D%	LDR 33
+004E%	STD 7F4
+004F%	LDR 34
+0050%	STD 7F3
+0051%	LDR 35
+0052%	STD 7F2
+0053%	LDR 36
+0054%	STD 7F1
+0055%	LDR 37
+0056%	STD 7F0
+0057%	LDR 38
+0058%	STD 7EF
+0059%	LDR SP		Restore BP
+005A%	LDA 0
+005B%	STD BP
+005C%	SPD 0
+005D%	LDR SP		Load RA		
+005E%	LDA 0
+005F%	SPD 0		Return	
+0060%	NOP 0
+0061%	STD PC
+0062%	NOP 0
+0063%	07E0 		-----xxxxxx-----
+0064%	1FF8 		---xxxxxxxxxx---
+0065%	3F3C 		--xxxxxx--xxxx--
+0066%	7F3E 		 -xxxxxxx--xxxxx-
+0067%	7FF8 		-xxxxxxxxxxxx---
+0068%	FFE0 		xxxxxxxxxxx-----
+0069%	FF80 		xxxxxxxxx------- 
+006A%	FF00 		xxxxxxxx--------
+006B%	FF00 		xxxxxxxx--------
+006C%	FF80 		xxxxxxxxx-------
+006D%	FFE0 		xxxxxxxxxxx-----
+006E%	7FF8 		-xxxxxxxxxxxx---
+006F%	7FFE 		-xxxxxxxxxxxxxx-
+0070%	3FFC 		--xxxxxxxxxxxx--
+0071%	1FF8 		---xxxxxxxxxx---
+0072%	07E0 		-----xxxxxx-----
+0073%	LDR 63		Draw open
+0074%	STD 7FE
+0075%	LDR 64
+0076%	STD 7FD
+0077%	LDR 65
+0078%	STD 7FC
+0079%	LDR 66
+007A%	STD 7FB
+007B%	LDR 67
+007C%	STD 7FA
+007D%	LDR 68
+007E%	STD 7F9
+007F%	LDR 69
+0080%	STD 7F8
+0081%	LDR 6A
+0082%	STD 7F7
+0083%	LDR 6B
+0084%	STD 7F6
+0085%	LDR 6C
+0086%	STD 7F5
+0087%	LDR 6D
+0088%	STD 7F4
+0089%	LDR 6E
+008A%	STD 7F3
+008B%	LDR 6F
+008C%	STD 7F2
+008D%	LDR 70
+008E%	STD 7F1
+008F%	LDR 71
+0090%	STD 7F0
+0091%	LDR 72
+0092%	STD 7EF
+0093%	LDR SP		Restore BP	
+0094%	LDA 0
+0095%	STD BP
+0096%	SPD 0
+0097%	LDR SP		Load RA
+0098%	LDA 0
+0099%	SPD 0		Return
+009A%	NOP 0
+009B%	STD PC
+009C%	NOP 0
+009D%	NOP 0
+009E%	NOP 0
+009F%	NOP 0
+00A0%	NOP 0
+00A1%	NOP 0
+00A2%	E5 			Delay 2 RA
+00A3%	C6 			Delay 1 RA	
+00A4%	30 			Delay arg
+00A5%	15 			Delay addr	
+00A6%	73 			Func 2 ptr
+00A7%	D2 			Call 2 RA	
+00A8%	39 			Func 1 ptr
+00A9%	B5 			Call 1 RA		
+00AA%	LDR A9		MAIN
+00AB%	SPI 0		Push return adr
+00AC%	SPI 0
+00AD%	STR SP
+00AE%	LDR BP
+00AF%	SPI 0
+00B0%	STR SP		Push BP
+00B1%	LDR SP		New BP	
+00B2%	STD BP
+00B3%	LDR SP
+00B4%	JMR A8		Call closed	
+00B5%	SPD 0
+00B6%	STD 7EE		Draw	
+00B7%	NOP 0
+00B8%	NOP 0
+00B9%	LDR A4
+00BA%	SPI 0
+00BB%	STR SP		Push arg
+00BC%	SPI 0
+00BD%	SPI 0
+00BE%	LDR A3
+00BF%	STR SP		Push RA
+00C0%	LDR BP
+00C1%	SPI 0
+00C2%	STR SP		Push BP
+00C3%	LDR SP		New BP
+00C4%	STD BP
+00C5%	JMR A5		Call delay
+00C6%	SPD 0
+00C7%	SPD 0
+00C8%	LDR A7
+00C9%	SPI 0		Push return adr
+00CA%	SPI 0
+00CB%	STR SP
+00CC%	LDR BP		Push BP
+00CD%	SPI 0
+00CE%	STR SP
+00CF%	LDR SP
+00D0%	STD BP
+00D1%	JMR A6		Call open
+00D2%	SPD 0
+00D3%	STD 7EE		Draw	
+00D4%	NOP 0
+00D5%	NOP 0
+00D6%	NOP 0
+00D7%	NOP 0
+00D8%	SPI 0
+00D9%	LDR A4
+00DA%	STR SP		Push arg	
+00DB%	SPI 0
+00DC%	SPI 0
+00DD%	LDR A2
+00DE%	STR SP		Push RA
+00DF%	SPI 0
+00E0%	LDR BP
+00E1%	STR SP		Push BP
+00E2%	LDR SP		New BP
+00E3%	STD BP
+00E4%	JMR A5		Call Delay
+00E5%	SPD 0	
+00E6%	SPD 0
+00E7%	JMR 01
+00E8%	NOP 0
+00E9%	NOP 0
+00EA%	NOP 0
+00EB%	NOP 0
+00EC%	NOP 0
+00ED%	NOP 0
+00EE%	NOP 0
+00EF%	NOP 0
+00F0%	NOP 0
+00F1%	NOP 0
+00F2%	NOP 0
+00F3%	NOP 0
+00F4%	NOP 0
+00F5%	NOP 0
+00F6%	NOP 0
+00F7%	NOP 0
+00F8%	NOP 0
+00F9%	NOP 0
+00FA%	NOP 0
+00FB%	NOP 0
+00FC%	NOP 0
+00FD%	NOP 0
+00FE%	NOP 0
+00FF%	NOP 0
+0100%	NOP 0
+0101%	NOP 0
+0102%	NOP 0
+0103%	NOP 0
+0104%	NOP 0
+0105%	NOP 0
+0106%	NOP 0
+0107%	NOP 0
+0108%	NOP 0
+0109%	NOP 0
+010A%	NOP 0
+010B%	NOP 0
+010C%	NOP 0
+010D%	NOP 0
+010E%	NOP 0
+010F%	NOP 0
+0110%	NOP 0
+0111%	NOP 0
+0112%	NOP 0
+0113%	NOP 0
+0114%	NOP 0
+0115%	NOP 0

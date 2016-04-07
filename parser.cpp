@@ -2,6 +2,7 @@
 #include "opcodes.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <bitset>
 #include <cstdlib>
 parser::parser(memoryModule* x)
@@ -18,144 +19,147 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		std::cout<<"Bad file specified"<<std::endl;
 		exit(0);
 	}
-	std::string comment;
-	std::string op;
-	std::string data;
-	while(std::getline(infile,comment,'*'))
+	std::string dump;
+	std::string p1;
+	std::string p2;
+	while(std::getline(infile,dump,'%'))
 	{
-		std::getline(infile,op,',');
-		std::getline(infile,data);
+		infile >> p1;
 		int16_t opint;
-		if (op == "NOP")
+		if (p1 == "NOP")
 		{
 			opint = NOP;
 		}
-		else if (op == "STD")
+		else if (p1 == "STD")
 		{
 			opint = STD;
 		}
-		else if (op == "ADD")
+		else if (p1 == "ADD")
 		{
 			opint = ADD;
 		}
-		else if (op == "SUB")
+		else if (p1 == "SUB")
 		{
 			opint = SUB;
 		}
-		else if (op == "MUL")
+		else if (p1 == "MUL")
 		{
 			opint = MUL;
 		}
-		else if (op == "DIV")
+		else if (p1 == "DIV")
 		{
 			opint = DIV;
 		}
-		else if (op == "AND")
+		else if (p1 == "AND")
 		{
 			opint = AND;
 		}
-		else if (op == "XOR")
+		else if (p1 == "XOR")
 		{
 			opint = XOR;
 		}
-		else if (op == "ORR")
+		else if (p1 == "ORR")
 		{
 			opint = ORR;
 		}
-		else if (op == "SPI")
+		else if (p1 == "SPI")
 		{
 			opint = SPI;
 		}
-		else if (op == "SPD")
+		else if (p1 == "SPD")
 		{
 			opint = SPD;
 		}
-		else if (op == "JMR")
+		else if (p1 == "JMR")
 		{
 			opint = JMR;
 		}
-		else if (op == "LDA")
+		else if (p1 == "LDA")
 		{
 			opint = LDA;
 		}
-		else if (op == "LDR")
+		else if (p1 == "LDR")
 		{
 			opint = LDR;
 		}
-		else if (op == "IEZ")
+		else if (p1 == "IEZ")
 		{
 			opint = IEZ;
 		}
-		else if (op == "IGZ")
+		else if (p1 == "IGZ")
 		{
 			opint = IGZ;
 		}
-		else if (op == "ILZ")
+		else if (p1 == "ILZ")
 		{
 			opint = ILZ;
 		}
-		else if (op == "IGE")
+		else if (p1 == "IGE")
 		{
 			opint = IGE;
 		}
-		else if (op == "ILE")
+		else if (p1 == "ILE")
 		{
 			opint = ILE;
 		}
-		else if (op == "JMA")
+		else if (p1 == "JMA")
 		{
 			opint = JMA;
 		}
-		else if (op == "STR")
+		else if (p1 == "STR")
 		{
 			opint = STR;
 		}
-		else if (op == "END")
+		else if (p1 == "END")
 		{
 			opint = END;
 		}
 		else
 		{
-			mem->set(currentaddress,strtol(op.c_str(),0,16));
+			int memval;
+			std::istringstream(p1)>>std::hex>>memval;
+			mem->set(currentaddress,memval);
 			currentaddress+=1;
+			std::getline(infile,dump,'\n');
 			continue;
 		}
 		
-
+		infile >> p2;
 		int16_t dataint;
-		if (data == "SP")
+		if (p2 == "SP")
 		{
 			dataint = SP;
 		}
-		else if (data == "BP")
+		else if (p2 == "BP")
 		{
 			dataint = BP;
 		}
-		else if (data == "PC")
+		else if (p2 == "PC")
 		{
 			dataint = PC;
 		}
-		else if (data == "OUT")
+		else if (p2 == "OUT")
 		{
 			dataint = OUT;
 		}
-		else if (data == "U1")
+		else if (p2 == "U1")
 		{
 			dataint = U1;
 		}
-		else if (data == "U2")
+		else if (p2 == "U2")
 		{
 			dataint = U2;
 		}
-		else if (data == "U3")
+		else if (p2 == "U3")
 		{
 			dataint = U3;
 		}
 		else
 		{
-			dataint = strtol(data.c_str(),0,16);
+			std::istringstream(p2)>>std::hex>>dataint;
 		}
 		mem->set(currentaddress,LINE(opint,dataint));
 		currentaddress+=1;
+		std::getline(infile,dump,'\n');
 	}
 }

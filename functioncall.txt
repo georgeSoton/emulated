@@ -1,68 +1,53 @@
-00						*JMR,04
-01			Literal 10	*000A,
-02			Literal 3	*0009,
-03			Function ptr*0020,
-04			Main ptr	*0006,
-05						*NOP,0
-06			push arg 10 *LDR,01
-07						*SPI,0
-08				""		*STR,SP
-09	Return value space	*SPI,0
-0A			push PC+off	*LDR,PC
-0B						*ADD,02
-0C						*SPI,0
-0D				""		*STR,SP
-0E			push BP		*LDR,BP
-0F						*SPI,0
-10				""		*STR,SP
-11			update BP	*LDR,SP
-12						*STD,BP
-13			Call func	*JMR,03
-14	Load RV from STDck	*LDR,SP
-15			Deref		*LDA,0
-16			Output!		*STD,OUT
-17						*END,0
-18						*NOP,0
-19						*NOP,0
-1A						*NOP,0
-1B						*NOP,0
-1C						*NOP,0
-1D						*NOP,0
-1E			Literal 3	*0003,
-1F			Literal 2	*0002,
-20			FUNCTION	*NOP,0
-21		Fetch Arg ptr	*LDR,BP
-22		(BP+3)			*ADD,1E
-23		Deref			*LDA,0
-24		Store in U1		*STD,U1
-25		Square			*MUL,U1
-26		Store in U1		*STD,U1
-27		Fetch RV ptr	*LDR,BP
-28		(BP+2)			*ADD,1F
-29						*NOP,0
-2A		Store in U2		*STD,U2
-2B		Load Square		*LDR,U1
-2C		Store in RV(&U2)*STR,U2
-2D		Restore BP		*LDR,BP
-2E						*LDA,0
-2F						*STD,BP
-30		Pop				*SPD,0
-31		Load RA			*LDR,SP
-32						*LDA,0
-33		Pop				*SPD,0
-34		Jump back		*JMA,0
-35						*
-36						*
-37						*
-38						*
-39						*
-3A						*
-3B						*
-3C						*
-3D						*
-3E						*
-3F						*
-40						*
-41						*
-42						*
-43						*
+00%	JMR 04
+01%	000A 		Literal 10
+02%	0009 		Literal 3
+03%	0020 		Function ptr
+04%	0006 		Main ptr
+05%	NOP 0
+06%	LDR 01		push arg 10 
+07%	SPI 0
+08%	STR SP		""	
+09%	SPI 0		Return value space
+0A%	LDR PC		push PC+off
+0B%	ADD 02
+0C%	SPI 0
+0D%	STR SP		""
+0E%	LDR BP		push BP	
+0F%	SPI 0
+10%	STR SP		""
+11%	LDR SP		update BP
+12%	STD BP
+13%	JMR 03		Call func
+14%	LDR SP		Load RV from STDck	
+15%	LDA 0		Deref
+16%	STD OUT		Output!	
+17%	END 0
+18%	NOP 0
+19%	NOP 0
+1A%	NOP 0
+1B%	NOP 0
+1C%	NOP 0
+1D%	NOP 0
+1E%	0003 		Literal 3
+1F%	0002 		Literal 2
+20%	NOP 0		FUNCTION
+21%	LDR BP		Fetch Arg ptr
+22%	ADD 1E		(BP+3)	
+23%	LDA 0		Deref
+24%	STD U1		Store in U1		
+25%	MUL U1		Square
+26%	STD U1		Store in U1		
+27%	LDR BP		Fetch RV ptr
+28%	ADD 1F		(BP+2)	
+29%	NOP 0
+2A%	STD U2		Store in U2	
+2B%	LDR U1		Load Square	
+2C%	STR U2		Store in RV(&U2)
+2D%	LDR BP		Restore BP	
+2E%	LDA 0		
+2F%	STD BP
+30%	SPD 0		Pop		
+31%	LDR SP		Load RA
+32%	LDA 0
+33%	SPD 0		Pop	
+34%	JMA 0		Jump back
