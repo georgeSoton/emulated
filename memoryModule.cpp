@@ -25,7 +25,7 @@ void memoryModule::set(int16_t address, int16_t value)
 	}
 	else if ((address > VIDEOBOT) && (address <= VIDEOTOP))	//VIDEO SECTOR
 	{
-		videoModule.setline(address-VIDEOBOT,value);
+		videoModule.setline(address-(VIDEOBOT+1),value);
 	}
 	else if (address == VIDEOBOT)
 	{
