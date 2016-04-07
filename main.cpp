@@ -303,6 +303,7 @@ int main(int argc, char *argv[])
 		if (dodebug)
 		{
 			std::cout<<"------------------------------------"<<std::endl;
+			std::cout<<"Line "<<executedline<<std::endl;
 			MEM.display(RAMLENGTH-1-debuglen,RAMLENGTH-1);
 			std::cout<<"ACCUMULATOR ------| 0x"<<std::hex<<std::setfill('0')<<std::setw(4)<<ALU.getAcc()<<std::endl;
 			std::cout<<"------------------------------------"<<std::endl;
