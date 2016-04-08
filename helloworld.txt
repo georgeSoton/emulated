@@ -1,7 +1,7 @@
 00%	JMR 001		Jump to loop
 01%	0012 		Address
-02%	0020 		
-03%	0001 		
+02%	001D 		End Address
+03%	0001 		Literal 1
 04%	0048 		H
 05%	0065 		e
 06%	006c 		l

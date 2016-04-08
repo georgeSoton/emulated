@@ -3,7 +3,6 @@
 #include "parser.h"
 #include "alu.h"
 #include "fileout.h"
-#include "ram.h"
 #include <string>
 #include <iostream>
 #include <fstream>
