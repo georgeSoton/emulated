@@ -18,12 +18,12 @@
 11%	LDR SP		update BP
 12%	STD BP
 13%	JMR 03		Call func
-14%	LDR SP		Load RV from STDck	
-15%	LDA 0		Deref
-16%	STD OUT		Output!	
-17%	END 0
-18%	NOP 0
-19%	NOP 0
+14%	LDR SP		Load RV from STDck				
+15%	LDA 0		Deref	
+16%	SPD 0		Flush stack
+17%	SPD 0
+18%	STD OUT		Output!
+19%	END 0
 1A%	NOP 0
 1B%	NOP 0
 1C%	NOP 0

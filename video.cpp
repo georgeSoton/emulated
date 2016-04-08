@@ -27,7 +27,7 @@ void video::draw()
 			}
 			else
 			{
-				std::cout<<" ";
+				std::cout<<"-";
 			}
 		}
 		std::cout<<std::endl;

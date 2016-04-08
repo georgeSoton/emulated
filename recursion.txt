@@ -1,0 +1,125 @@
+00	%	JMR 01
+01	%	60			Main function ptr
+02	%	NOP 0
+03	%	NOP 0
+04	%	NOP 0
+05	%	NOP 0
+06	%	NOP 0
+07	%	NOP 0
+08	%	NOP 0
+09	%	NOP 0
+0A	%	NOP 0
+0B	%	NOP 0
+0C	%	NOP 0
+0D	%	NOP 0
+0E	%	NOP 0
+0F	%	NOP 0
+10	%	0015		Pointer to this function
+11	%	003A		Return ptr for subcall
+12	%	002E		General case ptr
+13	%	001D		Base case ptr
+14	%	0001		Literal 1
+15	%	LDR BP		Factorial Function Start
+16	%	ADD 14		Down 3 to reach argument
+17	%	ADD 14
+18	%	ADD 14
+19	%	LDA 0		Load Argument
+1A	%	SUB 14		If equal to 1 return 1
+1B	%	IEZ 13
+1C	%	JMR 12		Else do a recursive call and pray
+1D	%	LDR BP		Get to Return Value
+1E	%	ADD 14
+1F	%	ADD 14
+20	%	STD U1		Store in U1
+21	%	LDR 14		Load 1
+22	%	STR U1		Return it
+23	%	LDR BP		Restore the BP
+24	%	LDA 0
+25	%	STD BP
+26	%	SPD 0		Load Return Address
+27	%	LDR SP		
+28	%	LDA 0		
+29	%	SPD 0		Clear return address from stack
+2A	%	STD PC		Jump back to calling function
+2B	%	NOP 0
+2C	%	NOP 0
+2D	%	NOP 0
+2E	%	SPI 0		Push n-1
+2F	%	STR	SP
+30	%	LDR 11		Push return address
+31	%	SPI 0
+32	%	SPI 0		And make room for RV
+33	%	STR SP		
+34	%	LDR BP
+35	%	SPI 0
+36	%	STR SP		Push prior BP
+37	%	LDR SP		Update BP
+38	%	STD BP
+39	%	JMR 10		Recursively call this function cos we're mental
+3A	%	LDR BP		Load this func's argument and store in U1
+3B	%	ADD 14	
+3C	%	ADD 14	
+3D	%	ADD 14	
+3E	%	LDA 0	
+3F	%	STD U1
+40	%	LDR SP		Load N(n-1) off the stack
+41	%	LDA 0
+42	%	MUL U1		Multiply by n
+43	%	SPD 0		Dump the stack frame
+44	%	STR SP		Push return value onto the stack
+45	%	LDR BP		Store Return Value address in U1
+46	%	ADD 14
+47	%	ADD 14
+48	%	STD U1	
+49	%	LDR SP		Take return value, store it at return value address
+4A	%	LDA 0
+4B	%	SPD 0
+4C	%	STR U1
+4D	%	LDR BP		Restore BP
+4E	%	LDA 0
+4F	%	STD BP
+50	%	SPD 0		Load Return address
+51	%	LDR SP	
+52	%	LDA 0
+53	%	SPD 0
+54	%	STD PC	
+55	%	NOP 0	
+56	%	NOP 0	
+57	%	NOP 0	
+58	%	NOP 0	
+59	%	NOP 0	
+5A	%	NOP 0	
+5B	%	NOP 0	
+5C	%	NOP 0	
+5D	%	NOP 0	
+5E	%	NOP 0	
+5F	%	NOP 0	
+60	%	006F		Return address
+61	%	0005		Factorial argument	
+62	%	SPI 0		Push argument
+63	%	LDR 61
+64	%	STR SP
+65	%	SPI 0		Push return address and space for return value
+66	%	SPI 0
+67	%	LDR 60
+68	%	STR SP	
+69	%	SPI 0		Push BP
+6A	%	LDR BP
+6B	%	STR SP
+6C	%	LDR SP		Set new BP
+6D	%	STD BP	
+6E	%	JMR	10		Call factorial
+6F	%	LDR SP
+70	%	LDA 0		Pop returned value
+71	%	SPD 0	
+72	%	SPD 0
+73	%	STD 07FE	Store on top video line	
+74	%	STD 07EE	Draw	
+75	%	NOP 0	
+76	%	NOP 0	
+77	%	NOP 0	
+78	%	NOP 0	
+79	%	NOP 0	
+7A	%	NOP 0	
+7B	%	NOP 0	
+7C	%	END 0	

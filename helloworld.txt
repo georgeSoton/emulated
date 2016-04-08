@@ -1,6 +1,6 @@
 00%	JMR 001		Jump to loop
 01%	0012 		Address
-02%	001D 		End Address
+02%	0020 		End Address
 03%	0001 		Literal 1
 04%	0048 		H
 05%	0065 		e
@@ -15,7 +15,7 @@
 0E%	0064 		d
 0F%	0021 		!
 10%	0000 		\0
-11%	0004 		String ptr
+11%	0004 		String ptr, begins at start of string
 12%	LDR 011		Load ptr
 13%	LDA 000		Deref
 14%	IEZ 002		If it's the null character branch to end
@@ -29,5 +29,5 @@
 1C%	NOP 0
 1D%	NOP 0
 1E%	NOP 0
-1F% NOP 0
+1F%	NOP 0
 20%	END 0		End

@@ -1,0 +1,19 @@
+00%	JMR 01		Jump to Line 10
+01%	0007		Literals
+02%	FFFF			
+03%	0042
+04%	0041
+05%	0006		End address
+06%	END 0
+07%	SPI 0		Increment Stack Pointer
+08%	LDR 02		Load in FF
+09%	STR SP		Store at the top of the stack
+0A%	LDR 01		Load another value
+0B%	LDR SP	
+0C%	LDA 0		Dereference SP to get value at top of stack
+0D%	ADD 03		Add 42 to that value
+0E%	STD OUT		Directly write to fileout
+0F%	STD 7FE		And to the video's top line
+10%	STD 7EE		Write to video draw		
+11%	SUB 04		Try and zero out the accumulator
+12%	IEZ 05		Which should cause a branch to END

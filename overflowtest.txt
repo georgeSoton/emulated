@@ -1,0 +1,37 @@
+00%		LDR 24
+01%		ILZ 22
+02%		ADD 23
+03%		JMR 23
+04%		NOP 0
+05%		NOP 0
+06%		NOP 0
+07%		NOP 0
+08%		NOP 0
+09%		NOP 0
+0A%		NOP 0
+0B%		NOP 0
+0C%		NOP 0
+0D%		NOP 0
+0E%		NOP 0
+0F%		NOP 0
+10%		NOP 0
+11%		NOP 0
+12%		NOP 0
+13%		NOP 0
+14%		NOP 0
+15%		NOP 0
+16%		NOP 0
+17%		NOP 0
+18%		NOP 0
+19%		NOP 0
+1A%		END 0
+1B%		NOP 0
+1C%		NOP 0
+1D%		NOP 0
+1E%		NOP 0
+1F%		NOP 0
+20%		NOP 0
+21%		NOP 0
+22%		1A
+23%		1
+24%		7FFF
