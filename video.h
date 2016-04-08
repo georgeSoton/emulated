@@ -9,7 +9,6 @@ public:
 	void draw();
 private:
 	int16_t lines[16];
-	bool redrawNeeded;
 };
 
 #endif

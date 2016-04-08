@@ -13,60 +13,57 @@
 #include <windows.h>
 
 std::ofstream outputFile;
-std::ofstream debugFile;
+std::ofstream debugFile;		//Extern'd output files
 
 int main(int argc, char *argv[])
 {
 
-	std::vector<int16_t> debugpoints;
-	bool dodebug	=	false;
-	int debuglen	=	0xF;
-	bool printline  =	false;
-	bool video		=	true;
-	for(int i=1;i<argc;i++)
+	std::vector<int16_t> debugpoints;	//Holds the breakpoints
+	bool dodebug	=	false;			//Loop variable that decides if we should go into debug printing
+	int debuglen	=	0xF;			//How far down the memory to print
+	bool printline  =	false;			//Whether to print out each line
+	bool video		=	true;			//Whether to print video
+
+	for(int i=1;i<argc;i++)				//For each cmd line argument
 	{
-		std::stringstream ss;
-		std::string dump;
+		std::stringstream ss;			//Stream holder for the argument
+		std::string dump;				//Place to drop stuff
 		ss<<argv[i];
-		std::getline(ss,dump,',');
-		if (dump=="-bp")
+		std::getline(ss,dump,',');		//Load up until the first comma
+		if (dump=="-bp")				//If it's the breakpoint argument
 		{
-			video = false;
-			while(1)
+			video = false;				//Turn off video output (cos we're debugging)
+			while(1)					//Loop through points
 			{
-				std::string debugp;
-				if(!std::getline(ss,debugp,','))
+				std::string debugp;					//String to hold debugpoints
+				if(!std::getline(ss,debugp,','))	//See if there is another item in the list
 				{
 					break;
 				}
-				std::stringstream conv;
 				int16_t debugint;
-				conv << debugp;
-				conv >>std::hex>>debugint;
-				debugpoints.push_back(debugint);
+				std::stringstream(debugp)>>std::hex>>debugint;	//Load that debugpoint into a variable and
+				debugpoints.push_back(debugint);				//Add to list
 			}
 		}
-		else if (dump=="-len")
+		else if (dump=="-len")					//If length argument
 		{
 				std::string val;
-				if(!std::getline(ss,val,' '))
+				if(!std::getline(ss,val,' '))	//Get rest of argument
 				{
 					break;
 				}
-				std::stringstream conv;
 				int16_t valint;
-				conv << val;
-				conv >>std::hex>>valint;
+				std::stringstream(val)>>std::hex>>valint;	//Load into debuglen
 				debuglen = valint;
 		}
-		else if (dump=="-lines")
+		else if (dump=="-lines")			//If lines argument
 		{
-			video = false;
+			video = false;					//Turn on line reporting, turn off video
 			printline = true;
 		}
 		else
 		{
-			std::cout<<std::endl;
+			std::cout<<std::endl;			//Help
 			std::cout<<"\t-bp,0,1,2,3 | Get breakpoints on those lines (in hex)"<<std::endl;
 			std::cout<<"\t-len,0xF    | Length at end of memory to see"<<std::endl;
 			std::cout<<"\t-lines      | View all lines as they run"<<std::endl;
@@ -79,22 +76,23 @@ int main(int argc, char *argv[])
 	std::string filename;
 	std::cin >> filename;
 	outputFile.open(("out_"+filename).c_str());
-	debugFile.open(("debug_"+filename).c_str());
+	debugFile.open(("debug_"+filename).c_str());	//Open output filestreams
 
-	memoryModule MEM = memoryModule();
-	MEM.setDraw(video);
+	memoryModule MEM = memoryModule();	//Initialise modules
+	MEM.setDraw(video);					//Turn on/off video report
 	parser PARSER = parser(&MEM);
 	alu ALU = alu();
-	PARSER.loadFromFile(filename.c_str(),0);
+	PARSER.loadFromFile(filename.c_str(),0);	//Load from text into memory
 	while(1)
 	{
 		Sleep(1);
-		int16_t currentinstruction = MEM.get(MEM.get(PC));
+		int16_t currentinstruction = MEM.get(MEM.get(PC));	//Fetch instruction and separate into parts
 		uint16_t opcode 	= (uint16_t)currentinstruction>>11;
 		int16_t data	= currentinstruction&0x07FF;
-		//std::cout<<std::hex<<opcode<<", "<<data<<std::endl;
-		int16_t executedline = MEM.get(PC);
-		MEM.set(PC, MEM.get(PC)+1);	//Increment PC
+		int16_t executedline = MEM.get(PC);					//Save current line for the sake of debug
+		MEM.set(PC, MEM.get(PC)+1);							//Increment PC
+
+		//All operations
 		if (opcode == END)
 		{
 			if (printline)
@@ -292,7 +290,7 @@ int main(int argc, char *argv[])
 			break;
 		}
 
-		for(int i = 0;i<debugpoints.size();i++)
+		for(int i = 0;i<debugpoints.size();i++)	//If we are on a debug line, ensure dodebug is true
 		{
 			if (debugpoints[i] == executedline)
 			{
@@ -300,8 +298,9 @@ int main(int argc, char *argv[])
 			}
 		}
 
-		if (dodebug)
+		if (dodebug)			//If we need to output debug
 		{
+			//Pretty debug message!
 			std::cout<<"------------------------------------"<<std::endl;
 			std::cout<<"Line "<<executedline<<std::endl;
 			MEM.display(RAMLENGTH-1-debuglen,RAMLENGTH-1);
@@ -310,10 +309,10 @@ int main(int argc, char *argv[])
 			char a;
 			std::cout<<"[N] NEXT LINE   |   [OTHER] NEXT BREAKPOINT"<<std::endl<<std::endl;
 			std::fflush(stdin);
-			std::cin.get(a);
+			std::cin.get(a);		//Offer the chance to advance to the next breakpoint or go line by line
 			if (a != 'n')
 			{
-				dodebug = false;
+				dodebug = false;	//Keep dodebug on the next line only if we asked so
 			}
 		}
 	}

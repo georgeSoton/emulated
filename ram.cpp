@@ -3,7 +3,7 @@
 
 ram::ram()
 {
-	for(int i=0;i<=RAMLENGTH;i++)
+	for(int i=0;i<=RAMLENGTH;i++)	//Initialise to 0
 	{
 		memory[i]=0;
 	}

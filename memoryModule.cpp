@@ -6,22 +6,22 @@ memoryModule::memoryModule()
 {
 	videoModule = video();
 	ramModule = ram();
-	ramModule.set(SP,U3);
+	ramModule.set(SP,U3);	//Set up registers on instantiation
 	ramModule.set(BP,U3);
 	ramModule.set(PC,0);
-	drawing = true;
+	drawing = true;			//Drawing video defaults to true
 }
 
 void memoryModule::set(int16_t address, int16_t value)
 {
 	if ((address > 0x7FF) || (address < 0))
 	{
-		debugFile<<"Invalid address specified for set: "<<address<<std::endl;
+		debugFile<<"Invalid address specified for set: "<<address<<std::endl;	//Out of range debug
 		return;
 	}
 	if (address == OUT)
 	{
-		outputFile<<(char)value;
+		outputFile<<(char)value;					//Outputting to file
 	}
 	else if ((address > VIDEOBOT) && (address <= VIDEOTOP))	//VIDEO SECTOR
 	{
@@ -29,11 +29,11 @@ void memoryModule::set(int16_t address, int16_t value)
 	}
 	else if (address == VIDEOBOT)
 	{
-		if (drawing) videoModule.draw();
+		if (drawing) videoModule.draw();		//Draw if drawing is on when written to this register
 	}
 	else if (address<RAMLENGTH)
 	{
-		ramModule.set(address,value);
+		ramModule.set(address,value);			//Regular memory writing
 	}
 	return;
 }
@@ -51,26 +51,26 @@ int16_t memoryModule::get(int16_t address)
 	}
 	else if ((address >= VIDEOBOT) && (address <= VIDEOTOP)) //VIDEO SECTOR
 	{
-		debugFile<<"Tried to read from protected VIDEO address"<<std::endl;
+		debugFile<<"Tried to read from protected VIDEO address"<<std::endl;			//If you're outside of RAM, fail!
 	}
 	else if (address < RAMLENGTH)
 	{
-		return ramModule.get(address);
+		return ramModule.get(address);		//Else do a regular return
 	}
 	return 0;
 }
 
 void memoryModule::display(int16_t from, int16_t to)
 {
-	std::cout<<" ADDR | NAME| PTRS| VALUE"<<std::endl;
-	for (int16_t i=from;i<=to;i++)
+	std::cout<<" ADDR | NAME| PTRS| VALUE"<<std::endl;	//Header line
+	for (int16_t i=from;i<=to;i++)						//For each line we're printing out
 	{
 
-		std::cout<<std::setfill('0')<<std::hex<<"0x"<<std::setw(3)<<i<<" |";
+		std::cout<<std::setfill('0')<<std::hex<<"0x"<<std::setw(3)<<i<<" |";	//Print line number
 		switch(i)
 		{
 			case SP:
-			std::cout<<std::setfill('-')<<std::setw(5)<<"SP"<<"|";
+			std::cout<<std::setfill('-')<<std::setw(5)<<"SP"<<"|";	//Print register name if there is one
 			break;
 			case BP:
 			std::cout<<std::setfill('-')<<std::setw(5)<<"BP"<<"|";
@@ -94,11 +94,13 @@ void memoryModule::display(int16_t from, int16_t to)
 			std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
 			break;
 		}
-		if (i == ramModule.get(SP))
+
+
+		if (i == ramModule.get(SP))							//Show where the SP and BP pointers are pointing
 		{
 			if (ramModule.get(SP)==ramModule.get(BP))
 			{
-				std::cout<<std::setfill('-')<<std::setw(5)<<"SP|BP"<<"|";
+				std::cout<<std::setfill('-')<<std::setw(5)<<"SP|BP"<<"|";	//SP and BP at same place
 			}
 			else
 			{
@@ -113,11 +115,11 @@ void memoryModule::display(int16_t from, int16_t to)
 		{
 			std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
 		}
-		std::cout<<std::setfill('0')<<" "<<"0x"<<std::setw(4)<<ramModule.get(i)<<std::dec<<std::endl;
+		std::cout<<std::setfill('0')<<" "<<"0x"<<std::setw(4)<<ramModule.get(i)<<std::dec<<std::endl;	//Print memory contents
 	}
 }
 
-void memoryModule::setDraw(bool state)
+void memoryModule::setDraw(bool state)	//Turn on/off drawing
 {
 	drawing = state;
 	return;

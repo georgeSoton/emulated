@@ -7,7 +7,7 @@
 #include <cstdlib>
 parser::parser(memoryModule* x)
 {
-	mem = x;
+	mem = x;	//Set pointer to RAM module
 }
 
 void parser::loadFromFile(const char* file,int16_t startaddress)
@@ -22,11 +22,11 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 	std::string dump;
 	std::string p1;
 	std::string p2;
-	while(std::getline(infile,dump,'%'))
+	while(std::getline(infile,dump,'%'))	//Dump everything up to %. This makes room for line #
 	{
-		infile >> p1;
+		infile >> p1;		//Load in the first block of text
 		int16_t opint;
-		if (p1 == "NOP")
+		if (p1 == "NOP")	//Check if it matches an opcode
 		{
 			opint = NOP;
 		}
@@ -114,19 +114,19 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		{
 			opint = END;
 		}
-		else
+		else				//If there is no opcode recognised, we are dealing with a literal
 		{
 			int memval;
-			std::istringstream(p1)>>std::hex>>memval;
+			std::istringstream(p1)>>std::hex>>memval;	//Load into memory as a literal
 			mem->set(currentaddress,memval);
 			currentaddress+=1;
-			std::getline(infile,dump,'\n');
+			std::getline(infile,dump,'\n');	//Dump the rest of the line
 			continue;
 		}
 		
-		infile >> p2;
+		infile >> p2;		//If we are dealing with an opcode, read the operand
 		int16_t dataint;
-		if (p2 == "SP")
+		if (p2 == "SP")		//If it matches a special register, convert
 		{
 			dataint = SP;
 		}
@@ -156,9 +156,9 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		}
 		else
 		{
-			std::istringstream(p2)>>std::hex>>dataint;
+			std::istringstream(p2)>>std::hex>>dataint;	//Else convert ltierally
 		}
-		mem->set(currentaddress,LINE(opint,dataint));
+		mem->set(currentaddress,LINE(opint,dataint));	//Set memory as OPCODE/DATA
 		currentaddress+=1;
 		std::getline(infile,dump,'\n');
 	}
