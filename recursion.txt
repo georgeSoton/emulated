@@ -45,7 +45,7 @@
 2C%	NOP 0
 2D%	NOP 0
 2E%	SPI 0		Push n-1
-2F%	STR	SP
+2F%	STR SP
 30%	LDR 11		Push return address
 31%	SPI 0
 32%	SPI 0		And make room for RV
