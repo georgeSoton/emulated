@@ -5,6 +5,7 @@
 #include <sstream>
 #include <bitset>
 #include <cstdlib>
+
 parser::parser(memoryModule* x)
 {
 	mem = x;	//Set pointer to RAM module

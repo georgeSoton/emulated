@@ -2,6 +2,8 @@
 #include "memoryModule.h"
 #include <iomanip>
 #include "fileout.h"
+#include <vector>
+
 memoryModule::memoryModule()
 {
 	videoModule = video();
@@ -62,6 +64,16 @@ int16_t memoryModule::get(int16_t address)
 
 void memoryModule::display(int16_t from, int16_t to)
 {
+	std::vector<int16_t> basepoints;
+	basepoints.push_back(U3);
+	if (ramModule.get(BP) != U3)
+	{
+		basepoints.push_back(ramModule.get(BP));
+		while(ramModule.get(basepoints.back()) != U3)
+		{
+			basepoints.push_back(ramModule.get(basepoints.back()));
+		}
+	}
 	std::cout<<" ADDR | NAME| PTRS| VALUE"<<std::endl;	//Header line
 	for (int16_t i=from;i<=to;i++)						//For each line we're printing out
 	{
@@ -113,7 +125,19 @@ void memoryModule::display(int16_t from, int16_t to)
 		}
 		else
 		{
-			std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
+			bool matched = false;
+			for(int j=0;j<basepoints.size();j++)
+			{
+				if (basepoints[j] == i) matched = true;
+			}
+			if (matched)
+			{
+				std::cout<<std::setfill('x')<<std::setw(5)<<""<<"|";
+			}
+			else
+			{
+				std::cout<<std::setfill('-')<<std::setw(5)<<""<<"|";
+			}
 		}
 		std::cout<<std::setfill('0')<<" "<<"0x"<<std::setw(4)<<ramModule.get(i)<<std::dec<<std::endl;	//Print memory contents
 	}

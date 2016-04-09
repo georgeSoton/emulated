@@ -1,5 +1,5 @@
 00	%	JMR 01
-01	%	60			Main function ptr
+01	%	62			Main function ptr
 02	%	NOP 0
 03	%	NOP 0
 04	%	NOP 0
