@@ -160,14 +160,14 @@
 009F%	NOP 0
 00A0%	NOP 0
 00A1%	NOP 0
-00A2%	E5 			Delay 2 RA
-00A3%	C6 			Delay 1 RA	
-00A4%	30 			Delay arg
-00A5%	15 			Delay addr	
-00A6%	73 			Func 2 ptr
-00A7%	D2 			Call 2 RA	
-00A8%	39 			Func 1 ptr
-00A9%	B5 			Call 1 RA		
+00A2%	00E5 		Delay 2 RA
+00A3%	00C6 		Delay 1 RA	
+00A4%	0030 		Delay arg
+00A5%	0015 		Delay addr	
+00A6%	0073 		Func 2 ptr
+00A7%	00D2 		Call 2 RA	
+00A8%	0039 		Func 1 ptr
+00A9%	00B5 		Call 1 RA		
 00AA%	LDR A9		MAIN
 00AB%	SPI 0		Push return adr
 00AC%	SPI 0
