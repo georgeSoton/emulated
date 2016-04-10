@@ -287,40 +287,42 @@ int main(int argc, char *argv[])
 			std::cout<<"Fell out of opcode case"<<std::endl;
 			break;
 		}
-
-		switch(data)
+		if(printline)
 		{
-			case SP:
-			std::cout<<", SP"<<std::endl;
-			break;
+			switch(data)
+			{
+				case SP:
+				std::cout<<", SP"<<std::endl;
+				break;
 
-			case BP:
-			std::cout<<", BP"<<std::endl;
-			break;
+				case BP:
+				std::cout<<", BP"<<std::endl;
+				break;
 
-			case PC:
-			std::cout<<", PC"<<std::endl;
-			break;
+				case PC:
+				std::cout<<", PC"<<std::endl;
+				break;
 
-			case U1:
-			std::cout<<", U1"<<std::endl;
-			break;
+				case U1:
+				std::cout<<", U1"<<std::endl;
+				break;
 
-			case U2:
-			std::cout<<", U2"<<std::endl;
-			break;
+				case U2:
+				std::cout<<", U2"<<std::endl;
+				break;
 
-			case U3:
-			std::cout<<", U3"<<std::endl;
-			break;
+				case U3:
+				std::cout<<", U3"<<std::endl;
+				break;
 
-			case FOUT:
-			std::cout<<", FOUT"<<std::endl;
-			break;
+				case FOUT:
+				std::cout<<", FOUT"<<std::endl;
+				break;
 
-			default:
-			std::cout<<", 0x"<<std::hex<<std::setw(3)<<data<<std::endl;
-			break;
+				default:
+				std::cout<<", 0x"<<std::hex<<std::setw(3)<<data<<std::endl;
+				break;
+			}
 		}
 
 		for(int i = 0;i<debugpoints.size();i++)	//If we are on a debug line, ensure dodebug is true
@@ -343,7 +345,7 @@ int main(int argc, char *argv[])
 			std::cout<<"[N] NEXT LINE   |   [OTHER] NEXT BREAKPOINT"<<std::endl<<std::endl;
 			std::fflush(stdin);
 			std::cin.get(a);		//Offer the chance to advance to the next breakpoint or go line by line
-			if (a != 'n')
+			if ((a != 'n') && (a != 'N'))
 			{
 				dodebug = false;	//Keep dodebug on the next line only if we asked so
 			}
