@@ -19,7 +19,7 @@
 12%	LDR 011		Load ptr
 13%	LDA 000		Deref
 14%	IEZ 002		If it's the null character branch to end
-15%	STD OUT		Else print it
+15%	STD FOUT		Else print it
 16%	LDR 011		Load the pointer
 17%	ADD 003		Increment it
 18%	STD 011		Store back

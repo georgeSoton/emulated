@@ -22,7 +22,7 @@
 15%	LDA 0		Deref	
 16%	SPD 0		Flush stack
 17%	SPD 0
-18%	STD OUT		Output!
+18%	STD FOUT		FOUTput!
 19%	END 0
 1A%	NOP 0
 1B%	NOP 0

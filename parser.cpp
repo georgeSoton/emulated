@@ -139,9 +139,9 @@ void parser::loadFromFile(const char* file,int16_t startaddress)
 		{
 			dataint = PC;
 		}
-		else if (p2 == "OUT")
+		else if (p2 == "FOUT")
 		{
-			dataint = OUT;
+			dataint = FOUT;
 		}
 		else if (p2 == "U1")
 		{

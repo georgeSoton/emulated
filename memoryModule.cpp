@@ -21,7 +21,7 @@ void memoryModule::set(int16_t address, int16_t value)
 		debugFile<<"Invalid address specified for set: "<<address<<std::endl;	//Out of range debug
 		return;
 	}
-	if (address == OUT)
+	if (address == FOUT)
 	{
 		outputFile<<(char)value;					//Outputting to file
 	}
@@ -47,9 +47,9 @@ int16_t memoryModule::get(int16_t address)
 		debugFile<<"Invalid address specified for get: "<<address<<std::endl;
 		return 0;
 	}
-	if (address == OUT)
+	if (address == FOUT)
 	{
-		debugFile<<"Tried to read from protected OUT address"<<std::endl;
+		debugFile<<"Tried to read from protected FOUT address"<<std::endl;
 	}
 	else if ((address >= VIDEOBOT) && (address <= VIDEOTOP)) //VIDEO SECTOR
 	{
@@ -90,8 +90,8 @@ void memoryModule::display(int16_t from, int16_t to)
 			case PC:
 			std::cout<<std::setfill('-')<<std::setw(5)<<"PC"<<"|";
 			break;
-			case OUT:
-			std::cout<<std::setfill('-')<<std::setw(5)<<"OUT"<<"|";
+			case FOUT:
+			std::cout<<std::setfill('-')<<std::setw(5)<<"FOUT"<<"|";
 			break;
 			case U1:
 			std::cout<<std::setfill('-')<<std::setw(5)<<"U1"<<"|";

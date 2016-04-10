@@ -5,7 +5,7 @@
 #include "ram.h"
 #include "video.h"
 
-#define OUT 	0x7FF
+#define FOUT 	0x7FF
 
 #define VIDEOTOP 0x7FE
 #define VIDEOBOT 0x7EE	//Bottommost bit sets a draw when written

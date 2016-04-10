@@ -16,7 +16,6 @@ std::ofstream debugFile;		//Extern'd output files
 
 int main(int argc, char *argv[])
 {
-
 	std::vector<int16_t> debugpoints;	//Holds the breakpoints
 	bool dodebug	=	false;			//Loop variable that decides if we should go into debug printing
 	int debuglen	=	0xF;			//How far down the memory to print
@@ -96,7 +95,7 @@ int main(int argc, char *argv[])
 		{
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | END"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | END";
 			}
 			break;
 		}
@@ -105,14 +104,14 @@ int main(int argc, char *argv[])
 			case NOP:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | NOP"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | NOP";
 			}
 			break;
 
 			case STD:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | STD"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | STD";
 			}
 			MEM.set(data,ALU.getAcc());
 			break;
@@ -120,7 +119,7 @@ int main(int argc, char *argv[])
 			case ADD:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | ADD"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | ADD";
 			}
 			ALU.aluAdd(MEM.get(data));
 			break;
@@ -128,7 +127,7 @@ int main(int argc, char *argv[])
 			case SUB:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | SUB"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | SUB";
 			}
 			ALU.aluSub(MEM.get(data));
 			break;
@@ -136,7 +135,7 @@ int main(int argc, char *argv[])
 			case MUL:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | MUL"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | MUL";
 			}
 			ALU.aluMul(MEM.get(data));
 			break;
@@ -144,7 +143,7 @@ int main(int argc, char *argv[])
 			case DIV:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | DIV"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | DIV";
 			}
 			ALU.aluDiv(MEM.get(data));
 			break;
@@ -152,7 +151,7 @@ int main(int argc, char *argv[])
 			case AND:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | AND"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | AND";
 			}
 			ALU.aluAnd(MEM.get(data));
 			break;
@@ -160,7 +159,7 @@ int main(int argc, char *argv[])
 			case XOR:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | XOR"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | XOR";
 			}
 			ALU.aluXor(MEM.get(data));
 			break;
@@ -168,7 +167,7 @@ int main(int argc, char *argv[])
 			case ORR:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | ORR"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | ORR";
 			}
 			ALU.aluOrr(MEM.get(data));
 			break;
@@ -176,7 +175,7 @@ int main(int argc, char *argv[])
 			case SPI:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | SPI"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | SPI";
 			}
 			MEM.set(SP,MEM.get(SP)-1);
 			break;
@@ -184,7 +183,7 @@ int main(int argc, char *argv[])
 			case SPD:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | SPD"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | SPD";
 			}
 			MEM.set(SP,MEM.get(SP)+1);
 			break;
@@ -192,7 +191,7 @@ int main(int argc, char *argv[])
 			case JMR:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | JMR"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | JMR";
 			}
 			MEM.set(PC,MEM.get(data));
 			break;
@@ -200,7 +199,7 @@ int main(int argc, char *argv[])
 			case LDA:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | LDA"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | LDA";
 			}
 			ALU.setAcc(MEM.get(ALU.getAcc()));
 			break;
@@ -208,7 +207,7 @@ int main(int argc, char *argv[])
 			case LDR:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | LDR"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | LDR";
 			}
 			ALU.setAcc(MEM.get(data));
 			break;
@@ -216,7 +215,7 @@ int main(int argc, char *argv[])
 			case IEZ:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | IEZ"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | IEZ";
 			}
 			if (ALU.flagIEZ())
 			{
@@ -227,7 +226,7 @@ int main(int argc, char *argv[])
 			case IGZ:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | IGZ"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | IGZ";
 			}
 			if (ALU.flagIGZ())
 			{
@@ -238,7 +237,7 @@ int main(int argc, char *argv[])
 			case ILZ:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | ILZ"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | ILZ";
 			}
 			if (ALU.flagILZ())
 			{
@@ -249,7 +248,7 @@ int main(int argc, char *argv[])
 			case IGE:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | IGE"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | IGE";
 			}
 			if (ALU.flagIGE())
 			{
@@ -260,7 +259,7 @@ int main(int argc, char *argv[])
 			case ILE:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | ILE"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | ILE";
 			}
 			if (ALU.flagILE())
 			{
@@ -271,7 +270,7 @@ int main(int argc, char *argv[])
 			case JMA:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | JMA"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | JMA";
 			}
 			MEM.set(PC,ALU.getAcc());
 			break;
@@ -279,13 +278,48 @@ int main(int argc, char *argv[])
 			case STR:
 			if (printline)
 			{
-				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | STR"<<std::hex<<", 0x"<<std::setfill('0')<<std::setw(3)<<data<<std::endl;
+				std::cout<<"Executing line "<<std::hex<<"0x"<<std::setfill('0')<<std::setw(3)<<MEM.get(PC)-1<<" | STR";
 			}
 			MEM.set(MEM.get(data),ALU.getAcc());
 			break;
 
 			default:
 			std::cout<<"Fell out of opcode case"<<std::endl;
+			break;
+		}
+
+		switch(data)
+		{
+			case SP:
+			std::cout<<", SP"<<std::endl;
+			break;
+
+			case BP:
+			std::cout<<", BP"<<std::endl;
+			break;
+
+			case PC:
+			std::cout<<", PC"<<std::endl;
+			break;
+
+			case U1:
+			std::cout<<", U1"<<std::endl;
+			break;
+
+			case U2:
+			std::cout<<", U2"<<std::endl;
+			break;
+
+			case U3:
+			std::cout<<", U3"<<std::endl;
+			break;
+
+			case FOUT:
+			std::cout<<", FOUT"<<std::endl;
+			break;
+
+			default:
+			std::cout<<", 0x"<<std::hex<<std::setw(3)<<data<<std::endl;
 			break;
 		}
 

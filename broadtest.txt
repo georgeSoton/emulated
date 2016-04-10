@@ -12,8 +12,8 @@
 0B%	LDR SP	
 0C%	LDA 0		Dereference SP to get value at top of stack
 0D%	ADD 03		Add 42 to that value
-0E%	STD OUT		Directly write to fileout
+0E%	STD FOUT		Directly write to fileFOUT
 0F%	STD 7FE		And to the video's top line
 10%	STD 7EE		Write to video draw		
-11%	SUB 04		Try and zero out the accumulator
+11%	SUB 04		Try and zero FOUT the accumulator
 12%	IEZ 05		Which should cause a branch to END
