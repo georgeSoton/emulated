@@ -1,6 +1,6 @@
 #ifndef RAM_H
 #define RAM_H
-#define RAMLENGTH 0x7EE
+#define RAMLENGTH 0x7E8
 #include <stdint.h>
 class ram
 {

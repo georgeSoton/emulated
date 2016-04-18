@@ -95,7 +95,7 @@
 5E%	NOP 0	
 5F%	NOP 0	
 60%	006F		Return address
-61%	0008		Factorial argument	
+61%	0004		Factorial argument	
 62%	SPI 0		Push argument
 63%	LDR 61
 64%	STR SP

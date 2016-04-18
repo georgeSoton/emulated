@@ -5,7 +5,7 @@ video::video()
 {
 	for(int i=0;i<16;i++)	//Initially all 0
 	{
-		lines[i]=0;
+		lines.push_back(0);
 	}
 }
 

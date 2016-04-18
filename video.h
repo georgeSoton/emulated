@@ -1,6 +1,7 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 #include <stdint.h>
+#include <vector>
 class video
 {
 public:
@@ -8,7 +9,7 @@ public:
 	void setline(int line,int16_t value);
 	void draw();
 private:
-	int16_t lines[16];
+	std::vector<int16_t> lines;
 };
 
 #endif

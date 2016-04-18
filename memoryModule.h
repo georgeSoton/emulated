@@ -19,6 +19,7 @@
 #define U3		0x7E8
 
 
+
 class memoryModule
 {
 public:
@@ -28,6 +29,7 @@ public:
 	void display(int16_t from, int16_t to);
 	void setDraw(bool state);
 private:
+	int16_t rSP,rBP,rPC,rU1,rU2,rU3;	//Privileged registers
 	ram ramModule;
 	video videoModule;
 	bool drawing;
